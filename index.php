@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
   <script src='banner.js'defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+  
 </head>
 <body>
 
@@ -26,35 +28,103 @@
 ?>
 
 
+
+  
 <div class="slideshow-container">
     
     <div class="mySlides fade">
-    <img src="post.gif" style="width:1482px; height:620px"/>
-    <div class="numbertext">1 / 3</div>
+    <img src="post.gif" style="height: 100%; width: 100%; object-fit: contain"/>
+    
       
       
     </div>
     
     <div class="mySlides fade">
       
-      <img src="camera.gif" style="width:1482px; height:620px"/>
+      <img src="camera.gif" style="height: 100%; width: 100%; object-fit: contain"/>
       
     </div>
     
     <div class="mySlides fade">
       
-      <img src="system.gif" style="width:1482px; height:620px"/>
+      <img src="system.gif" style="height: 100%; width: 100%; object-fit: contain"/>
     
     </div>
     
     
-    </div>
+</div>
     <div style="text-align:center">
       <span class="dot"></span> 
       <span class="dot"></span> 
       <span class="dot"></span> 
     </div>
+  
+    <div class="content">
+ <div class="container2">
 
+
+  
+ <div class="minigallery">
+ <a href=file.php>
+ <img src="pc2.jpg">
+ <div class="overlay1">
+ 
+     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
+  </div></div></div>
+  <div class="minigallery">
+ <a href=file.php>
+ <img src="pc2.jpg">
+ <div class="overlay1">
+ 
+     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
+  </div></div></div>
+  <div class="minigallery">
+ <a href=file.php>
+ <img src="pc2.jpg">
+ <div class="overlay1">
+ 
+     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
+  </div></div></div>
+       
+  <div class="minigallery">
+ <a href=file.php>
+ <img src="pc2.jpg">
+ <div class="overlay1">
+ 
+     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
+  </div></div></div>
+  
+  <div class="minigallery">
+ <a href=file.php>
+ <img src="pc2.jpg">
+ <div class="overlay1">
+ 
+     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
+  </div></div></div>
+      
+  <div class="minigallery">
+ <a href=file.php>
+ <img src="pc2.jpg">
+ <div class="overlay1">
+ 
+     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
+  </div></div></div>
+  <div class="minigallery">
+ <a href=file.php>
+ <img src="pc2.jpg">
+ <div class="overlay1">
+ 
+     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
+  </div></div></div>
+      
+  <div class="minigallery">
+ <a href=file.php>
+ <img src="pc2.jpg">
+ <div class="overlay1">
+ 
+     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
+  </div></div></div>
+  </div>
     <div class="placement">
     <div class="dropdown">
   <button class="dropbtn">Filter <img src="filter2.png" height="12px" width="12px"></button>
@@ -67,75 +137,24 @@
      <input type="submit" id="reset" name="reset" value="Reset" />
   </form>
   </div>
-</div>
-</div>
-<?php
+ </div>
+ </div>
+ <?php
  if(isset($_POST["txtstartdate"], $_POST["txtenddate"]))  {
   $txtstartdate = date ($_POST['txtstartdate']);
   $txtenddate=date ($_POST['txtenddate']);
-$result = $db->query("SELECT id,image,file_name,uploaded,short_desc,long_desc FROM images3 WHERE 
-uploaded BETWEEN '".$txtstartdate."' AND '".$txtenddate."'"); 
+ $result = $db->query("SELECT id,image,file_name,uploaded,short_desc,long_desc FROM images3 WHERE 
+ uploaded BETWEEN '".$txtstartdate."' AND '".$txtenddate."'"); 
 
-}else{
+ }else{
   $result = $db->query("SELECT id,image,file_name,uploaded,short_desc,long_desc FROM images3 ORDER BY uploaded DESC");
  } 
  if(isset($_POST["reset"])){
   $result = $db->query("SELECT id,image,file_name,uploaded,short_desc,long_desc FROM images3 ORDER BY uploaded DESC");
  } ?>
 
- <?php $counter=0; ?> 
- <br>
+<?php include 'itemshow.php';?>
 
- 
- <table cellspacing=25;  class="grid">
- 
- <div  id='order_table'> 
- 
-<?php if($result->num_rows > 0){ ?> 
-   
-
-  
-        <?php while($row = $result->fetch_assoc()){ ?> 
-          <?php if($counter == 0){ ?>
-              <?php echo "<tr>"; ?>
-          <?php } ?>
-          <?php if($counter % 3==0){ ?>
-              <?php echo "</tr>"; ?>
-          <?php } ?>
-          <?php if($counter % 3==0){ ?>
-              <?php echo "<tr>"; ?>
-          <?php } ?>
-          
-         <td>  <div class="gallery"> 
-           <div class="fadeblock">
-         
-            <a href='product.php?id=<?= $row['id'] ?>'>
-               <img class="editLink"  src="data:image/jpg;charset=utf8;base64, <?php echo base64_encode($row['image']);?>"  /> 
-               <!-- <?php echo ($row['file_name']); ?> -->
-              
-               <div class="overlay"> 
-               <div class="text"> <?php echo ($row['short_desc']); ?></div>
-            <!-- <br><?php echo ($row['long_desc']); ?> -->
-            </a>
-            
-           </div>
-          </div>
-          </div>
-            <?php  $counter++; ?>  </td>
-          
-            
-            
-        
-        <?php } ?> 
-        
-        
-
-
-<?php }else{ ?> 
-    <p class="status error">Image(s) not found...</p> 
-<?php } ?>
-</div>
-</table>
 
 <!-- <?php $sql = "SELECT * FROM users";
  $result = mysqli_query($db, $sql);
@@ -148,7 +167,10 @@ if ($rowCount > 0) {
     echo "No results found.";
    } 
   ?> -->
-
+</div>
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
 </body>
 </html>
 

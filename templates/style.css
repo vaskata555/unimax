@@ -1,12 +1,16 @@
 /*------------------------------------------------------------fading panel--------------------------------------------------------*/
 
-body { font-family: "Times New Roman", Times, serif;}
+body { font-family: 'Lato', sans-serif;}
 .mySlides {display: none;}
 img {vertical-align: middle;}
-  div.slideshow-container {
-  max-width: 1000px;
+ .slideshow-container {
+  width:100%;
   position: relative;
-  margin: 0px -10px;
+  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;    
+  align-items: flex-start;
 }
 table p{
   position:absolute;
@@ -14,24 +18,10 @@ table p{
   background-color: white;
 }
 /* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
+
 
 /* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
+
 
 /* The dots/bullets/indicators */
 .dot {
@@ -71,38 +61,38 @@ table p{
   .text {font-size: 11px}
 }
 /* -------------------------------------------------gallery----------------------------------------------------------------- */
-.gallery {
-    
-    border: 1px solid #ccc;
-    padding: 5px;
-    margin: 0px 18px;
-    
-  }
+
   .overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position:absolute;
+    z-index:20;
     height: 100%;
     width: 100%;
     opacity: 0;
+    left:-7%;
+    top:0%;
     transition: .5s ease;
-    background-color: #008CBA;
+    background-color: #fff;
   }
-  .gallery:hover .overlay {
+  .item:hover .overlay {
     opacity: 1;
+    z-index:20;
+    background-color: #fff;
   }
   .text {
-    color: white;
-    font-size: 20px;
+    color: red;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10% 10%;
     position: absolute;
+    bottom:0px;
+    width: 100%;
+    text-align: center;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    text-align: center;
+  
   }
   .gallery img {
     width: 380px;
@@ -147,7 +137,7 @@ table p{
   /*----------------------------------------------------------navbar------------------------------------------------------------*/
  
 body {
-    background-color: lightblue
+    background-color: #457B9D
     ;
   }
   
@@ -168,21 +158,21 @@ body {
     display: block;
     color: white;
     text-align: center;
-    padding: 0px 0px;
+    padding: 6px 0px;
     text-decoration: none;
     
   }
   .telephoneadress {
-    
+    float:right;
     padding-top:25px;
     color: white;
     text-align: middle ;
   }
   li a.btnbrand{      /*  text*/
-    padding: 38px 20px;
+    padding: 44px 30px;
      height:42px ;
      width:130px; 
-     font-size:30px;
+     font-size:22px;
     }
   
   /* Change the link color to #111 (black) on hover */
@@ -191,8 +181,8 @@ body {
   }
   /**/
   .placement{
-    position: absolute;
-    right: 130px  ;
+    position: relative;
+    right: -100%  ;
   }
   
    
@@ -252,4 +242,295 @@ body {
    font-size: 20  ;
     table-layout: fixed;
   
+}
+.small_grid  {
+  margin:20px;
+  padding: 6px 120px;
+  
+}
+.small_grid td img {
+  width:200px;
+}
+.small_grid td  {
+  position: relative;
+  margin-left:AUTO;
+  padding: 5px 20px;
+  
+}
+.minigallery{
+  flex: 1;
+  
+  z-index:0;
+  display: block;
+  position: relative;
+  padding: 20px;
+  margin: 20px 10px;
+  opacity:1;
+}
+.minigallery:hover .overlay1 {
+  opacity: 1;
+  z-index:20;
+  background-color: #fff;
+}
+.overlay1 {
+  top: 0%;
+  z-index:20;
+  position:absolute;
+  height: 100%;
+  width: 100%;
+  max-width: 25vmax;
+  opacity: 0;
+margin-left:-10%;
+  transition: .5s ease;
+  background-color: #fff;
+}
+.text1 {
+  color: #ff0000;
+  font-size: 13px;
+  padding: 0px 0px;
+  position: absolute;
+  bottom:10px;
+  width: 100%;
+  text-align: center;
+  
+ top:30%  ;
+  
+  
+  font-weight: bold;
+}
+.burrongrid{
+ margin-top:13px;
+  padding: 0px 0px;
+  background-color: #333;
+  color: white;
+  width: 100%;
+  height: 50px;
+  font-weight: bold;
+  cursor:pointer;
+}
+.burrongrid1{
+  margin-top:13px;
+  padding: 0px 0px;
+  background-color: #333;
+  color: white;
+  width: 100%;
+  height: 50px;
+  font-weight: bold;
+  cursor:pointer;
+}
+.containernav{
+  flex:1;
+  width:101%;
+  height:100%;
+ 
+  flex-direction: row;
+  flex-wrap: wrap;    
+  align-items: flex-start;
+}
+.container3{
+  padding-right:1%;
+  float:right;
+}
+.nav1{
+width:100%;
+
+}
+
+.container1 {
+  margin: auto;
+  margin-left:5%;
+  width:100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;    
+  align-items: flex-start;
+  gap: 10px 20px;
+  justify-content: normal;
+}
+.container2 {
+  margin: auto;
+  padding:auto;
+  margin-left:5%;
+  width:100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;    
+  align-items: flex-start;
+  gap: 10px 20px;
+  padding:5% 5%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: normal;
+}
+.item {
+ 
+  flex: 1;
+  display: block;
+  position: relative;
+  padding: 20px;
+  margin: 20px 10px;
+ 
+  
+}
+img.imagebd{
+  height:20vw;
+  width:20vw;
+  display: block;
+}
+.bg {
+  animation:slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+  bottom:0;
+  left:-50%;
+  opacity:.5;
+  position:fixed;
+  right:-50%;
+  top:0;
+  z-index:-1;
+}
+
+.bg2 {
+  animation-direction:alternate-reverse;
+  animation-duration:4s;
+}
+
+.bg3 {
+  animation-duration:5s;
+}
+
+.content {
+ 
+  flex:1;
+  width:100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;    
+  align-items: flex-start;
+  gap: 10px 20px;
+  justify-content: normal;
+}
+ 
+ 
+ 
+  
+  
+  
+  
+
+
+h1 {
+  font-family:monospace;
+}
+
+@keyframes slide {
+  0% {
+    transform:translateX(-25%);
+  }
+  100% {
+    transform:translateX(25%);
+  }
+}
+.fadeblock{
+  position:relative;
+}
+/*----------------------------------------------------------------------------------*/
+.enterform{
+  display: block;
+  
+  width:100%;
+  justify-content:center;
+}
+.centerform{
+  display: block;
+  right:-50%;
+margin-left:40%;
+  justify-content:center;
+  margin-top:10%;
+}
+.insideform{
+  width:40%;
+  height:40%;
+  background-size: cover;
+  min-width:200px ;
+  background:white;
+  background-repeat: no-repeat; 
+}
+.registration form {
+  width: 220px;
+  height:330px;
+  background-color: black;
+  padding: 10px 0px 0px 4px;
+  border-radius: 15px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: bold;
+  font-family: "Century Gothic";
+}
+
+.registration input, .registration select {
+  width: 195px;
+  height: 20px;
+  margin: 3px 0px 0px 10px;
+  border: 0px;
+  font-weight: bold;
+}
+
+.registration input:focus {
+  background-color: orange;
+}
+
+.registration form label {
+  margin: 5px 0px 0px 15px;
+}
+
+a {
+  outline: none;
+}
+
+.register_button {
+  width: 149px;
+  height: 42px;
+  background-color: orange;
+  border-radius: 10px;
+  margin: 15px auto 0px auto;
+  text-align: center;
+  cursor: pointer;
+  clear: both;
+}
+
+.register_button span {
+  font-weight: normal;
+  font-size: 28px;
+  font-family: "Impact";
+  line-height: 40px;
+}
+
+.register_button span a {
+  text-decoration: none;
+  color: white;
+}
+
+.register_button span a:hover {
+  color: black;
+}
+
+span.error {
+  margin-right: 20px;
+  font-size: 9px;
+  color: orange;
+  height: 10px;
+}
+
+p.error {
+  margin: 0px 14px 0px 10px;
+  font-size: 9px;
+  color: orange;
+  height: 6px;
+  padding: 0px 0px 8px 0px;
+  text-align: right;
+  text-transform: none;
 }
