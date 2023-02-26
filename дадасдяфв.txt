@@ -1,0 +1,27 @@
+create or replace PROCEDURE client_create -- Задаваме име на процедурата
+(v_namee clientt.namee%TYPE, -- входни параметри – име тип (%TYPE )
+v_phone_number clientt.phone_number%TYPE)
+AS
+BEGIN -- начало на тялото на процедурата
+INSERT INTO clientt(namee,phone_number)
+Values (v_namee,v_phone_number);
+END; -- край на тялото на процедурата
+
+create or replace procedure client_delete
+(
+v_phone_number clientt.phone_number%type)
+as
+BEGIN 
+delete from clientt where ID_CLIENT = 1;
+end;
+create or replace PROCEDURE client_update
+(v_phone_number clientt.phone_number%TYPE ,
+v_namee clientt.namee%TYPE
+)
+AS
+BEGIN -- начало на тялото на процедурата
+ UPDATE clientt set phone_number= v_phone_number;
+ UPDATE clientt set namee= v_namee
+
+where phone_number= 5;
+ END; 

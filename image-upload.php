@@ -5,6 +5,10 @@
    <head>
 <title>Upload Image PHP MySQL Tutorial</title>
  <link rel='stylesheet' href='style.css' />
+ <?php include('templates/header.php');
+     include('templates/footer.php');
+    
+    ?>
  <style>
     #content{
     width: 50%;

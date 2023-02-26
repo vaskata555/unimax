@@ -18,6 +18,7 @@ include ('templates/footer.php');
 display: flex;
 justify-content: center;
 flex-direction: column;
+
 }
 .hr-line{
 width: 82%;
@@ -35,12 +36,14 @@ margin: auto;
   outline: none;
   transition: 0.4s;
   margin: auto;
+  background-color:#3E92CC;
 }
 .faq-body{
   margin: auto;
   /* text-align: center; */
  width: 80%; 
  padding: auto;
+ background-color: #F9F9F9;
  
 }
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
@@ -67,8 +70,10 @@ margin: auto;
   content: "\2796";
 }
     </style>
+   
 </head>
 <body>
+
 
 <h1 class="faq-heading">FAQ</h1>
 <section class="faq-container">
@@ -108,7 +113,14 @@ margin: auto;
         </div>
     </div>
 </section>
-</main>
+</div>
 
+
+</main>
+<div class="content">
+
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
 </body>
 </html>

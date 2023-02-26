@@ -9,12 +9,13 @@ if (isset($_POST['submit'])) {
 
     $username = $_POST['username'];
     $password = $_POST['password'];
-
+   
+    
     if (empty($username) || empty($password)) {
         header("Location: ../index.php?error=emptyfields");
         exit();
     } else {
-        $sql = "SELECT * FROM users WHERE username = ?";
+        $sql = "SELECT * FROM users1 WHERE username = ?";
         $stmt = mysqli_stmt_init($db);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
             header("Location: ../index.php?error=sqlerror");
@@ -33,7 +34,9 @@ if (isset($_POST['submit'])) {
                 } elseif ($passCheck == true) {
                     session_start();
                     $_SESSION['sessionId'] = $row['id'];
-                    $_SESSION['sessionUser'] = $row['username'];
+                 $_SESSION['sessionUser'] = $row['username'];
+                 $_SESSION['sessionUsertype'] = $row['type'];
+                
                     header("Location: ../index.php?success=loggedin");
                     exit();
                 } else {

@@ -21,25 +21,28 @@ require_once 'templates/header.php';
 <div class="registration">
   <form>
     <label>Your email</label>
-    <input type="text" />
+    <input type="email" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" name="email"placeholder="Email" >
     <p class="error">
-      <span>This email exists already in the database</span>
+      
+    </p>
+    <label>Your Username</label>
+    <input type="text" name="username" placeholder="Username"/>
+    <p class="error">
+     
     </p>
 
     <label>Password</label>
-    <input type="text" />
+    <input type="password" name="password" placeholder="Password">
     <p class="error">
       <span>At least 8 characters</span>
     </p>
 
     <label>Password [repeat]</label>
-    <input type="text" />
-    <p class="error">
-      <span>Some text here</span>
-    </p>
+    <input type="password" name="confirmPassword" placeholder="Confirm password">
+    
 
-    <div class="register_button">
-      <span><a href="#">REGISTER</a></span>
+    <div >
+      <span><button type="submit" class="register_button" name="submit">REGISTRER</button></span>
     </div>
   </form>
 </div>

@@ -1,6 +1,8 @@
 <?php require_once 'dbConfig.php'; 
 session_start();
+
 ?>
+
 <head>
 <link rel="stylesheet" href="templates/style.css">
 <script src="templates/jquery.min.js"></script>
@@ -8,7 +10,7 @@ session_start();
 <script  src="templates/bootstrap.min.js"></script> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, 
 user-scalable=no">
-<script  src="templates/sizefixer.js"></script> 
+
 
 <title>UnimaxOOD</title>
 

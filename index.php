@@ -8,8 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
   <script src='banner.js'defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+
 </head>
 <body>
 
@@ -20,35 +21,44 @@
     ?>
     <?php
     if (isset($_SESSION['sessionId'])) {
-        echo "You are logged in!";
+
+
+        echo "Hello: ";
+        echo $_SESSION['sessionUser'];
+        echo'  ';
+        echo $type = $_SESSION['sessionUsertype'];
+        echo'  ';
+        if($type=="admin"){
+        echo '<a href="admin_dashboard.php" class="btnbrand">Admin Dashboard</a>';
+        echo'  ';
+        echo '<a href="upload.php" class="btnbrand">upload product</a>';
+        }
     } else {
         echo "Home";
     }
-
+   
+   
 ?>
-
-
+ 
 
   
 <div class="slideshow-container">
     
-    <div class="mySlides fade">
-    <img src="post.gif" style="height: 100%; width: 100%; object-fit: contain"/>
-    
+    <div class="mySlides">
+    <img src="post.gif" >
       
       
     </div>
     
     <div class="mySlides fade">
       
-      <img src="camera.gif" style="height: 100%; width: 100%; object-fit: contain"/>
+      <img src="camera.gif" >
       
     </div>
     
     <div class="mySlides fade">
       
-      <img src="system.gif" style="height: 100%; width: 100%; object-fit: contain"/>
-    
+      <img src="system.gif" >
     </div>
     
     
