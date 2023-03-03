@@ -149,20 +149,20 @@ table p{
   flex-wrap: wrap;
   background-color: #fff;
   }
- .producttext{
+  .producttextcontainer{
   
  padding-inline-start:1%;
  padding-top:1% ;
  padding-bottom:1% ;
-  max-width:50%;
-  max-height:50%;
-  font-size:100%;
-  display: flex;
-  flex: 1;
-
+ max-width:44vw;
+  max-height:20vw;
+ 
     display:inline-block;
-    
   }
+.producttextspan{
+  max-width:44vw;
+ font-size:1.2vw;
+}
   .desc {
     padding: 15px;
     text-align: center;
@@ -392,22 +392,43 @@ table p{
   font-weight: bold;
   cursor:pointer;
 }
-.containernav{
-  flex: 1 0 100%; /* [1] */
-  order: 2; /* [2] */
-  margin: 1rem -1rem -1rem -1rem; /* [3] */
-  padding: 1rem; /* [4] */
-  display: flex; /* [5] */
-  justify-content: center; /* [5] */
+.container{
+  background-color: #333;
 }
 .container3{
   padding-right:1%;
   float:right;
 }
 .nav1{
-width:100%;
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin-bottom: 2vw;
+  background-color: #333;
+  color: #fff;
+display: block;
+  z-index: 80;
 }
+#nav{
+  position: fixed;
+  
+}
+@media (max-width: 768px) {
+  .nav1 {
+    height: auto;
+  }
+
+  .nav-collapse {
+    display: block;
+  }
+
+  .toggle-menu {
+    display: block;
+  }
+}
+
+
 
 .container1 {
   margin: auto;
@@ -696,4 +717,194 @@ a.adminbutton{
   width: 50%;
   margin: 20px auto;
   border: 1px solid #cbcbcb;
+}
+.galleryproduct{
+  margin-left:1%;
+    margin-right:1%;
+    margin-top:2%;
+    padding-top:2%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;    
+    align-items: flex-start;
+    gap: 10px 20px;
+    justify-content: normal;
+}
+.galleryprodutscreen{
+  display:inline-block;
+  margin-left:1%;
+  margin-right:1%;
+  margin-top:2%;
+  padding-top:2%;
+flex:1;
+flex-direction: row;
+flex-wrap: wrap;
+background-color: #fff;
+}
+.small-images img {
+  width:15vw;
+  height:15vw;
+}
+.product-image{
+  margin-top:-10vw;
+  margin-right:1vw;
+  width:25vw;
+  height:25vw;
+}
+.wholeproductpage{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;    
+  align-items: flex-start;
+}
+.buynowbutton {
+	box-shadow:inset 0px 0px 15px 3px #23395e;
+	background:linear-gradient(to bottom, #2e466e 5%, #415989 100%);
+	background-color:#2e466e;
+	border-radius:17px;
+	border:1px solid #1f2f47;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:16px;
+	font-weight:bold;
+	padding:5px 35px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #263666;
+}
+.buynowbutton:hover {
+	background:linear-gradient(to bottom, #415989 5%, #2e466e 100%);
+	background-color:#415989;
+}
+.buynowbutton:active {
+	position:relative;
+	top:1px;
+}
+.textareaupload{
+  resize: none;
+}
+.firstadminpanel{
+border:solid;
+border-width: 3px;
+border-style:double 
+}
+.headeredit {
+	background-color: #333;
+	color: #fff;
+	padding: 20px;
+	text-align: center;
+}
+.formedit {
+	margin: 20px;
+	padding: 20px;
+	border: 1px solid #333;
+}
+input[type="text"],
+input[type="email"],
+.selectedit{
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+.submitedit{
+  background-color: #0784bd;
+	color: #fff;
+	padding: 12px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.submitedit:hover{
+  background-color: #0871a2;
+}
+
+#sidebar {
+  height:200%;
+  width: 12vw;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #333;
+  overflow-x: hidden;
+  padding-top: 10vw;
+}
+#sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.5vw;;
+}
+#sidebar li {
+  margin-bottom: 0.5vw;
+  margin-left: 0.5vw;
+  padding: 0.5vw;
+}
+#sidebar a {
+  display: block;
+  padding: 0.5vw;
+  color: #fff;
+  text-decoration: none;
+}
+#content {
+  margin-left: 200px;
+  padding: 20px;
+}
+.allimageproductboxdash{
+ 
+margin: 1vw;
+}
+.wholeproductpagedash{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;    
+  align-items: flex-start;
+}
+.producttextcontainerdash{
+  padding-inline-start:1%;
+  padding-top:1% ;
+  padding-bottom:1% ;
+  max-width:30vw;
+   max-height:20vw;
+  
+     display:inline-block;
+}
+.dividedashinfo{
+  border:solid;
+  padding-top:10vw;
+  border-width: 3px;
+  border-style:double ;
+  margin: 1vw;
+}
+@media screen and (max-width: 750px) {
+  #sidebar {
+    height:200%;
+    width: 18vw;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    overflow-x: hidden;
+    padding-top: 67vw;
+  }
+}
+.toggle-menu {
+  display: none;
+  font-size: 24px;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: block;
+}
+@media screen and (min-width: 768px) {
+ .toggle-menu {
+    display: none;
+  }
 }

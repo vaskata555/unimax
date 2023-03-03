@@ -26,10 +26,21 @@ require_once 'templates/header.php';
       
     </p>
     <label>Your Username</label>
-    <input type="text" name="username" placeholder="Username"/>
+    <input type="text" name="username" placeholder="Username" required><br>
     <p class="error">
      
     </p>
+    <label for="first_name">First Name:</label><br>
+			<input type="text" id="first_name" name="first_name"placeholder="Иван" required><br>
+
+      <label for="lastName">Last Name:</label><br>
+			<input type="text" id="last_name" name="last_name" placeholder="Иванов" required><br>
+
+      <label for="organization">Organization:</label><br>
+			<input type="text" id="organization" name="organization" required><br>
+
+      <label for="phone_number">Phone Number:</label><br>
+			<input type="text" id="phone_number" name="phone_number" required><br>
 
     <label>Password</label>
     <input type="password" name="password" placeholder="Password">
