@@ -26,6 +26,9 @@
     }
 
 ?>
+
+
+
          <?php  $id = $_GET['id'];
     $result = $db->query("SELECT * FROM images3 where id = $id");
    
@@ -55,7 +58,13 @@
 <div class="pricefield">
 <?php echo "цена: ".($row['price']); ?>
 <br>
-<a href="#" class="buynowbutton">Купи сега</a>
+<?php echo "<form method='post' action=''>";
+echo"<input type='hidden' name='code' value=".$row['code']." />";
+//echo "<td><a href='shoppingcard.php?code=".$row['code']."'class='buynowbutton''". "'>Купи сега</a> ";
+echo"<button type='submit' class='buynowbutton'>Buy Now</button>";
+echo"</form>";
+?>
+
      </div>
 
      </div>
@@ -63,3 +72,57 @@
     <?php } ?>
      </body>
      </html>
+     <?php
+$status="";
+if (isset($_POST['code']) && $_POST['code']!=""){
+$code = $_POST['code'];
+$result = mysqli_query($db,"SELECT * FROM `images3` WHERE `code`='$code'"
+);
+$row = mysqli_fetch_assoc($result);
+$title = $row['title'];
+$code = $row['code'];
+$price = $row['price'];
+$image = $row['image'];
+
+$cartArray = array(
+	$code=>array(
+	'title'=>$title,
+	'code'=>$code,
+	'price'=>$price,
+	'quantity'=>1,
+	'image'=>$image)
+);
+
+if(empty($_SESSION["shopping_cart"])) {
+    $_SESSION["shopping_cart"] = $cartArray;
+    $status = "<div class='box'>Product is added to your cart!</div>";
+   
+}else{
+    $array_keys = array_keys($_SESSION["shopping_cart"]);
+    if(in_array($code,$array_keys)) {
+	$status = "<div class='box' style='color:red;'>
+	Product is already added to your cart!</div>";	
+    } else {
+    $_SESSION["shopping_cart"] = array_merge(
+    $_SESSION["shopping_cart"],
+    $cartArray
+    );
+    $status = "<div class='box'>Product is added to your cart!</div>";
+	}
+
+	}
+}
+?>
+<?php
+if(!empty($_SESSION["shopping_cart"])) {
+$cart_count = count(array_keys($_SESSION["shopping_cart"]));
+?>
+<div class="cart_div">
+<a href="shoppingcard.php"><img src="cart-icon.png" /> Cart<span>
+<?php echo $cart_count; ?></span></a>
+</div>
+<?php
+}
+
+?>
+<?php echo $status;?>

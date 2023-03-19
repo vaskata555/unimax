@@ -80,7 +80,56 @@
  <div class="overlay1">
  
      <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
+      </div></div></div>
+      </a>
+  <div class="minigallery">
+  <a href=file.php>
+ <img src="pc2.jpg">
+ <div class="overlay1">
+ 
+     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
   </div></div></div>
+  </a>
+  <div class="minigallery">
+  <a href=file.php>
+ <img src="pc2.jpg">
+ <div class="overlay1">
+ 
+     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
+  </div></div></div>
+  </a>   
+  <div class="minigallery">
+  <a href=file.php>
+ <img src="pc2.jpg">
+ <div class="overlay1">
+ 
+     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
+  </div></div></div>
+  </a>
+  <div class="minigallery">
+  <a href=file.php>
+ <img src="pc2.jpg">
+ <div class="overlay1">
+ 
+     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
+  </div></div></div>
+  </a>   
+  <div class="minigallery">
+  <a href=file.php>
+ <img src="pc2.jpg">
+ <div class="overlay1">
+ 
+     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
+  </div></div></div>
+  </a>
+  <div class="minigallery">
+  <a href=file.php>
+ <img src="pc2.jpg">
+ <div class="overlay1">
+ 
+     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
+  </div></div></div>
+  </a>  
   <div class="minigallery">
  <a href=file.php>
  <img src="pc2.jpg">
@@ -88,67 +137,9 @@
  
      <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
   </div></div></div>
-  <div class="minigallery">
- <a href=file.php>
- <img src="pc2.jpg">
- <div class="overlay1">
- 
-     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
-  </div></div></div>
-       
-  <div class="minigallery">
- <a href=file.php>
- <img src="pc2.jpg">
- <div class="overlay1">
- 
-     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
-  </div></div></div>
+  </a>
   
-  <div class="minigallery">
- <a href=file.php>
- <img src="pc2.jpg">
- <div class="overlay1">
- 
-     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
-  </div></div></div>
-      
-  <div class="minigallery">
- <a href=file.php>
- <img src="pc2.jpg">
- <div class="overlay1">
- 
-     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
-  </div></div></div>
-  <div class="minigallery">
- <a href=file.php>
- <img src="pc2.jpg">
- <div class="overlay1">
- 
-     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
-  </div></div></div>
-      
-  <div class="minigallery">
- <a href=file.php>
- <img src="pc2.jpg">
- <div class="overlay1">
- 
-     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
-  </div></div></div>
-  </div>
-    <div class="placement">
-    <div class="dropdown">
-  <button class="dropbtn">Filter <img src="filter2.png" height="12px" width="12px"></button>
-  <div class="dropdown-content">
-   <form method="post">
-     
-     <input type="date" id="txtstartdate"  name="txtstartdate">
-     <input type="date" id="txtenddate" name="txtenddate">
-     <input type="submit" name="search" id="search" value="search between dates" >
-     <input type="submit" id="reset" name="reset" value="Reset" />
-  </form>
-  </div>
- </div>
- </div>
+    
  <?php
  if(isset($_POST["txtstartdate"], $_POST["txtenddate"]))  {
   $txtstartdate = date ($_POST['txtstartdate']);
@@ -162,7 +153,22 @@
  if(isset($_POST["reset"])){
   $result = $db->query("SELECT id,image,file_name,uploaded,short_desc,long_desc FROM images3 ORDER BY uploaded DESC");
  } ?>
-
+</div>
+<div class="placement">
+    <div class="dropdown">
+  <button class="dropbtn">Filter <img src="filter2.png" height="12px" width="12px"></button>
+  
+  <div class="dropdown-content">
+   <form method="post">
+     
+     <input type="date" id="txtstartdate"  name="txtstartdate">
+     <input type="date" id="txtenddate" name="txtenddate">
+     <input type="submit" name="search" id="search" value="search between dates" >
+     <input type="submit" id="reset" name="reset" value="Reset" />
+  </form>
+  </div>
+ </div>
+ </div>
 <?php include 'itemshow.php';?>
 
 

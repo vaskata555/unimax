@@ -6,9 +6,10 @@
  
  
  
- <?php if($result->num_rows > 0){ ?> 
+ 
   <div class="container1">
-  
+   
+  <?php if($result->num_rows > 0){ ?> 
  
         <?php while($row = $result->fetch_assoc()){ ?> 
             
@@ -20,14 +21,14 @@
               <div class="overlay">
                <!-- <?php echo ($row['file_name']); ?> -->
              
-              
+             
                <div class="textproducts"> <?php echo ($row['short_desc']); ?>
               </div></div>
                </div>
                
         
         
-        
+               </a>
         <?php  $counter++; ?>
             
             

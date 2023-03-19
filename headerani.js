@@ -1,1 +1,1 @@
-gsap.from('.container',{duration: 1,y:'-100%'})
+gsap.from('.topnav',{duration: 1,y:'-100%'})

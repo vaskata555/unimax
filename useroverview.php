@@ -2,7 +2,7 @@
      include('templates/footer.php');
     
     ?> 
-    <div id="sidebar">
+   <div class="sidebar">
 		<ul>
 			<li><a href="#">Dashboard</a></li>
 			<li><a href="useroverview.php">Users</a></li>

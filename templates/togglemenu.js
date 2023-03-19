@@ -1,5 +1,8 @@
-$(document).ready(function(){
-    $('.burgermenu').on('click', function(){
-        $('.mob-nav').toggle();
-    })
-});
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
