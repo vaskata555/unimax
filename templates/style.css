@@ -1239,7 +1239,7 @@ label.labelpay{
 	top:1px;
 }
 button.cashpayb{
-  background-color: transparent;
+  background-color: #0784bd;
   background-repeat: no-repeat;
 position:relative;
 border:none;
@@ -1250,6 +1250,7 @@ border:none;
   height:fit-content;
   padding:0.5vw;
   align-items: center;
+
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -1269,4 +1270,71 @@ input::-webkit-inner-spin-button {
 }
 .cashpayment{
   width:30vw;
+}
+.profilesave{
+  background-color: #0784bd;
+  background-repeat: no-repeat;
+position:relative;
+border:none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;  
+  width: 100%;
+  height:fit-content;
+  padding:0.5vw;
+  align-items: center;
+
+}
+.profileoverview{
+  width:30vw;
+}
+label.profilelabel{
+  display:inline-block;
+}
+
+@media only screen and (max-width: 500px){
+  label.profilelabel {
+   
+   margin:2vw;
+}
+}
+.profilecheckbox{
+  border: 9px solid #1C6EA4;
+  background-color: white;
+  border-radius: 40px;
+  padding:1vw;
+  width:30vw;
+  margin-left:4vw;
+  
+}
+@media screen and (max-width: 1555px) {
+  .profilecheckbox{
+  margin:0;
+  width:40vw;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .profilecheckbox{
+  margin:0;
+  width:53vw;
+  }
+}
+@media screen and (max-width: 850px) {
+  .profilecheckbox{
+  margin:0;
+  width:62vw;
+  }
+}
+@media screen and (max-width: 600px) {
+  .profilecheckbox{
+  margin:0;
+  width:80vw;
+  }
+}
+@media screen and (max-width: 480px) {
+  .profilecheckbox{
+  margin:0;
+  width:99vw;
+  margin-left:-3vw;
+  }
 }

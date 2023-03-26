@@ -20,8 +20,9 @@ require_once 'templates/header.php';
 -->
 <div class="registration">
   <form>
+  
     <label>Your email</label>
-    <input type="email" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" name="email"placeholder="Email" >
+    <input type="email" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" name="email"placeholder="Email" required >
     <p class="error">
       
     </p>
@@ -31,8 +32,9 @@ require_once 'templates/header.php';
      
     </p>
     <label for="first_name">First Name:</label><br>
+    
 			<input type="text" id="first_name" name="first_name"placeholder="Иван" required><br>
-
+     
       <label for="lastName">Last Name:</label><br>
 			<input type="text" id="last_name" name="last_name" placeholder="Иванов" required><br>
 
@@ -51,9 +53,10 @@ require_once 'templates/header.php';
     <label>Password [repeat]</label>
     <input type="password" name="confirmPassword" placeholder="Confirm password">
     
-
+   
     <div >
       <span><button type="submit" class="register_button" name="submit">REGISTRER</button></span>
+
     </div>
   </form>
 </div>

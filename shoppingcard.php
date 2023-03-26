@@ -130,13 +130,13 @@ if (mysqli_num_rows($result) > 0) {
   <label class="labelpay">Фамилия</label>
   <input type="text" name="lastname" value="<?php echo $row['last_name'] ?>"required></input>
   <label class="labelpay">Адрес за доставка</label>
-  <input type="text" name="address1"required></input>
+  <input type="text" name="address1"value="<?php echo $row['address1'] ?>" required></input>
   <label class="labelpay">Адрес за фактуриране</label>
-  <input type="text" name="address2"required></input>
+  <input type="text" name="address2" value="<?php echo $row['address2'] ?>"required></input>
   <label class="labelpay">Телефонен Номер</label>
   <input type="text" name="phone" value="<?php echo $row['phone_number'] ?>"required></input>
   <label class="labelpay">пощенски код</label>
-  <input type="text" name="post_code" required></input>
+  <input type="text" name="post_code" value="<?php echo $row['post_code'] ?>" required></input>
   
   <!--<a class="cashpay" href="">-->
 <button type="submit" id="submit1" name="submit1" class="cashpayb">CASH</button>

@@ -25,10 +25,27 @@ user-scalable=no">
 
   <a href="products.php">продукти</a>
   <a href="q&a.php">За нас</a>
-  <a href="shoppingcard.php" class="shoppingcard">Количка</a>
+  
+  <?php
+if (isset($_SESSION['sessionId'])) {
+ $type = $_SESSION['sessionUsertype'];
+if($type=='admin'||$type=='user'||$type=='manager'){
+   echo '<a href='.'shoppingcard.php'.'>'.'Количка'.'</a>';
+}
+}
+?>
+   <?php
+if (isset($_SESSION['sessionId'])) {
+ $type = $_SESSION['sessionUsertype'];
+if($type=='admin'||$type=='user'||$type=='manager'){
+   echo '<a href='.'profile.php'.'>'.'Профил'.'</a>';
+}
+}
+?>
   <a href="login.php" class="login">вход в сайта</a>
   <a href="register.php" class="register" >регистрация</a>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+  
   <i class="fa fa-bars"></i>
   </a>
   

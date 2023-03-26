@@ -4,6 +4,7 @@ $post_code = $_POST['post_code'];
 $total_price = $_POST['total_price'];
 $address1 = $_POST['address1'];
 $address2 = $_POST['address2'];
+
 if (isset($_POST['submit1'])) {
     require 'templates/dbConfig.php'; 
 
@@ -29,6 +30,7 @@ if (isset($_POST['submit1'])) {
             $code = $product["code"];
         $price = $product["price"];
         $title = $product["title"]; 
+        $quantity = $product["quantity"]; 
         echo "$post_code";
         $shopid = $_SESSION['sessionId'];
         echo "$shopid";
@@ -52,11 +54,11 @@ if (isset($_POST['submit1'])) {
         $last_name = $user["last_name"];
         
        
-        $sql = "INSERT INTO payment_info (order_number, email, phone_number, username,organization,first_name,last_name,code,price,title,total_price,address1,address2,post_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO payment_info (order_number, email, phone_number, username,organization,first_name,last_name,code,quantity,price,title,total_price,address1,address2,post_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($db, $sql);
         foreach ($_SESSION["shopping_cart"] as $key => $value) {
             
-            mysqli_stmt_bind_param($stmt, "ssssssssssssss", $order_number, $email, $phone_number, $username, $organization, $first_name, $last_name, $value["code"], $value["price"], $value["title"], $total_price, $address1, $address2, $post_code);
+            mysqli_stmt_bind_param($stmt, "sssssssssssssss", $order_number, $email, $phone_number, $username, $organization, $first_name, $last_name, $value["code"],$value["quantity"], $value["price"], $value["title"], $total_price, $address1, $address2, $post_code);
             mysqli_stmt_execute($stmt);
             
         }

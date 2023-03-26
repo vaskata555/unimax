@@ -40,33 +40,15 @@ if (isset($_POST['submit'])) {
     } elseif (strlen($password) > 20 || strlen($password) <= 8) {
         header("Location: ../register.php?error=invalidpasswordtooshort&password=");
         exit();
-    }elseif(strlen($email) > 2 ) {
-        $sql1 = "SELECT email FROM users1 WHERE email = ?";
-        $stmt1 = mysqli_stmt_init($db);
-        if (!mysqli_stmt_prepare($stmt1, $sql1)) {
-            header("Location: ../register.php?error=sqlerror");
-            exit();
-        } else {
-        
-        
-        mysqli_stmt_bind_param($stmt1, "s", $email);
-        mysqli_stmt_execute($stmt1);
-        mysqli_stmt_store_result($stmt1);
-        $rowCount1 = mysqli_stmt_num_rows($stmt1);
-
-        if ($rowCount1 > 0) {
-            header("Location: ../register.php?error=EmailTaken");
-            exit();
-        }
-    }
     }elseif  (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
          
             header("Location: ../register.php?error=invalidemail&email=".$email);
             exit();
-    
+          
         
         
-    }else {
+    }
+    else {
         $sql = "SELECT username FROM users1 WHERE username = ?";
         $stmt = mysqli_stmt_init($db);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -98,10 +80,8 @@ if (isset($_POST['submit'])) {
                 }
             }
         }
-        
     }
     mysqli_stmt_close($stmt);
     mysqli_close($db);
 }
 ?>
-
