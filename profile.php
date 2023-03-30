@@ -86,31 +86,58 @@ if (mysqli_num_rows($result1) > 0) {
   while ($row1 = mysqli_fetch_assoc($result1)) {
     $code = $row1['code'];
     $title = $row1['title'];
-  echo "$code"."<br>";
-  echo "$title"."<br>";
- // $sql2 = "SELECT * FROM products where code = $code";
- //  $result2 = mysqli_query($db, $sql2);
-//if (mysqli_num_rows($result2) > 0) {
- // }
- // while ($row2 = mysqli_fetch_assoc($result2)) {
- // }
-  ?>
-<div class="small-images"> <img   src="data:image/jpg;charset=utf8;base64, <?php echo base64_encode($row['image']);?>" /> </div>
-  <?php }?>
-   <h1><?php echo ($row['title']); ?></h1>  
-     <?php echo base64_encode($row['image']);?>" /> 
-          <div class="small-images"> <img   src="data:image/jpg;charset=utf8;base64, <?php echo base64_encode($row['image']);?>" /> </div>
-     </div>
-       <div class="producttextcontainerdash">  <?php echo("<span class=producttextspan >".$row['long_desc']."</span>"); ?></div>
-       
-     </div>
-     <?php echo $row['title']; ?>
-     <?php echo "цена: ".($row['price']); ?>
-     </div>
+    $order_number = $row1['order_number'];
+    $order_date =$row1['order_date'];
+    $warranty_date=$row1['warranty_date'];
+    $quantity= $row1['quantity'];
+    $price= $row1['price'];
+  $sql2 = "SELECT * FROM images3 where code = '$code'";
+   $result2 = mysqli_query($db, $sql2);
+   
+if (mysqli_num_rows($result2) > 0) {
+  
+  while ($row2 = mysqli_fetch_assoc($result2)) {
+    ?>
+     <div class="product-row">
+    <div class="image-column">
+  <div class="small-images"> <img   src="data:image/jpg;charset=utf8;base64, <?php echo base64_encode($row2['image']);?>" /> </div>
+  </div>
+<?php } ?>
+<div class="details-column">
+      <div class="detail-row">
+        <div class="label">Title:</div>
+        <div class="value"><?php echo $title; ?></div>
+      </div>
+      <div class="detail-row">
+        <div class="label">Order Number:</div>
+        <div class="value"><?php echo $order_number; ?></div>
+      </div>
+      <div class="detail-row">
+        <div class="label">Date:</div>
+        <div class="value"><?php echo $order_date; ?></div>
+      </div>
+      <div class="detail-row">
+        <div class="label">Warranty Date:</div>
+        <div class="value"><?php echo $warranty_date; ?></div>
+      </div>
+      <div class="detail-row">
+        <div class="label">Quantity:</div>
+        <div class="value"><?php echo $quantity; ?></div>
+      </div>
+      <div class="detail-row">
+        <div class="label">Price:</div>
+        <div class="value"><?php echo $price; ?></div>
+      </div>
+    </div>
+  </div>
+  <?php }}?>
+   
+   
     
   
   <?php 
 }
   
   ?>
+  </div>
 </div>

@@ -1545,3 +1545,47 @@ label.profilelabel{
   margin-left:-3vw;
   }
 }
+.flexplacer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.alreadybought{
+  margin-left: 1vw;
+}
+
+.product-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5vw;
+}
+
+.image-column {
+  flex: 0 0 ;
+  margin-right: 1vw;
+}
+
+.image-column img {
+  width: 8vw;
+  height: 8vw;
+}
+
+.details-column {
+  flex: 1;
+}
+
+.product-row h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.product-row p {
+  font-size: 16px;
+  margin: 0;
+  margin-bottom: 5px;
+}
+.detail-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
