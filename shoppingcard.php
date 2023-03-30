@@ -60,10 +60,12 @@ foreach ($_SESSION["shopping_cart"] as $product){
 
 <img  src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode ($product["image"]); ?>" width="70" height="60" />
 </td>
+
 <td><?php echo $product["title"]; ?><br />
 <form method='post' action=''>
 <input type='hidden' name='code' value="<?php echo $product["code"]; ?>" />
 <input type='hidden' name='action' value="remove" />
+<input type='hidden' name='id_product' value="<?php echo $product["id"]; ?>" />
 <button type='submit' class='remove'>Remove Item</button>
 </form>
 </td>
@@ -122,22 +124,22 @@ if (mysqli_num_rows($result) > 0) {
 ?>
 <form class="cashpayment" action="payment-processing.php" method="post">
 <input type='hidden' name='code' value="<?php echo $product["code"]; ?>" />
-
+<input type='hidden' name='id_product' value="<?php echo $product["id"]; ?>" />
 <input type='hidden' name='shopid' value="<?php echo $shopid; ?>" />
 <input type='hidden' name="total_price" id="total_price" value="<?php echo $total_price ?>"></input>
 <label class="labelpay">Име</label>
-  <input type="text" name="name" value="<?php echo $row['first_name'] ?>"required></input>
-  <label class="labelpay">Фамилия</label>
-  <input type="text" name="lastname" value="<?php echo $row['last_name'] ?>"required></input>
+<input type="text" name="name" class="shopping-name" value="<?php echo $row['first_name'] ?>" required>
+<label class="labelpay">Фамилия</label>
+  <input type="text" name="lastname" class="shopping-lastname" value="<?php echo $row['last_name'] ?>"required></input>
   <label class="labelpay">Адрес за доставка</label>
-  <input type="text" name="address1"value="<?php echo $row['address1'] ?>" required></input>
-  <label class="labelpay">Адрес за фактуриране</label>
-  <input type="text" name="address2" value="<?php echo $row['address2'] ?>"required></input>
-  <label class="labelpay">Телефонен Номер</label>
-  <input type="text" name="phone" value="<?php echo $row['phone_number'] ?>"required></input>
+  <input type="text" name="address1" class="shopping-address1" value="<?php echo $row['address1'] ?>" required>
+<label class="labelpay">Адрес за фактуриране</label>
+<input type="text" name="address2" class="shopping-address2" value="<?php echo $row['address2'] ?>" required>
+<label class="labelpay">Телефонен Номер</label>
+<input type="text" name="phone" class="shopping-phone" value="<?php echo $row['phone_number'] ?>"required></input>
   <label class="labelpay">пощенски код</label>
-  <input type="text" name="post_code" value="<?php echo $row['post_code'] ?>" required></input>
-  
+  <input type="text" name="post_code" class="shopping-postcode" value="<?php echo $row['post_code'] ?>" required>
+
   <!--<a class="cashpay" href="">-->
 <button type="submit" id="submit1" name="submit1" class="cashpayb">CASH</button>
  <!--</a>-->

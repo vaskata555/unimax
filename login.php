@@ -7,7 +7,7 @@ require_once 'templates/header.php';
 <script src='background.js'defer></script>
 <div class="enterform">
     <div class="centerform">
-        <div class="insideform">
+        <div class="insideformlogin">
     <p> LOGIN HERE! </p>
     
     <form action="templates/login-inc.php" method="post">

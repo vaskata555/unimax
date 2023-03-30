@@ -79,13 +79,14 @@ $code = $_POST['code'];
 $result = mysqli_query($db,"SELECT * FROM `images3` WHERE `code`='$code'"
 );
 $row = mysqli_fetch_assoc($result);
+$id_product = $row['id'];
 $title = $row['title'];
 $code = $row['code'];
 $price = $row['price'];
 $image = $row['image'];
-
 $cartArray = array(
 	$code=>array(
+    'id'=>$id_product,
 	'title'=>$title,
 	'code'=>$code,
 	'price'=>$price,

@@ -588,15 +588,17 @@ h1 {
 }
 .centerform{
   display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+margin-top:4%;
  
   
-margin-top:5%;
-  justify-content:center;
-  
 }
-.insideform{
-  width:40%;
-  height:40%;
+.insideformlogin{
+  width:50vw;
+  height:10vw;
   padding: 100px;
   border-radius: 7px;
   
@@ -604,6 +606,64 @@ margin-top:5%;
   min-width:200px ;
   background:rgb(36, 70, 209);
   background-repeat: no-repeat; 
+}
+.insideformregister{
+  width:30vw;
+  height:30vw;
+  padding: 100px;
+  border-radius: 7px;
+  justify-content: center;
+  background-size: cover;
+  min-width:200px ;
+  background:rgb(36, 70, 209);
+  background-repeat: no-repeat; 
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 1555px) {
+  .insideformregister{
+  margin:0;
+  width:30vw;
+  height:30vw;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .insideformregister{
+    width:30vw;
+    height:55vw;
+  }
+}
+@media screen and (max-width: 600px) {
+  .insideformregister{
+    width:30vw;
+    height:65vw;
+  }
+}
+@media screen and (max-width: 500px) {
+  .insideformregister{
+    width:30vw;
+    height:72vw;
+  }
+}
+@media screen and (max-width: 460px) {
+  .insideformregister{
+    width:30vw;
+    height:88vw;
+  }
+}
+@media screen and (max-width: 380px) {
+  .insideformregister{
+    width:30vw;
+    height:94vw;
+  }
+}
+@media screen and (max-width: 350px) {
+  .insideformregister{
+    width:30vw;
+    height:98vw;
+  }
 }
 .registration form {
   width: 220px;
@@ -640,8 +700,8 @@ a {
 }
 
 .register_button {
-  width: 149px;
-  height: 42px;
+  width: 15vw;
+  height: 3.5vw;
   background-color: rgb(38, 99, 253);
   border-radius: 10px;
   margin: 15px auto 0px auto;
@@ -671,6 +731,7 @@ span.error {
   font-size: 9px;
   color: rgb(0, 0, 0);
   height: 10px;
+  float:left;
 }
 
 p.error {
@@ -681,6 +742,7 @@ p.error {
   padding: 0px 0px 8px 0px;
   text-align: right;
   text-transform: none;
+  
 }
 td.small-image-product{
   width:5%;
@@ -781,11 +843,118 @@ border-style:double
 }
 .formedit {
 	margin: 20px;
-	padding: 20px;
-	border: 1px solid #333;
+	padding: 10px;
+	border: 2px solid #333;
+  display: flex;
+  justify-content: center;
 }
-input[type="text"],
-input[type="email"],
+input[type="text"].profile_first_name,
+input[type="text"].profile_last_name,
+input[type="text"].profile_username,
+input[type="text"].profile_email,
+input[type="text"].profile_organization,
+input[type="text"].profile_address1,
+input[type="text"].profile_address2,
+input[type="text"].profile_phone_number,
+input[type="text"].profile_post_code{
+  width: 20vw;
+}
+@media only screen and (max-width: 1555px){
+  input[type="text"].profile_first_name,
+  input[type="text"].profile_last_name,
+  input[type="text"].profile_username,
+  input[type="text"].profile_email,
+  input[type="text"].profile_organization,
+  input[type="text"].profile_address1,
+  input[type="text"].profile_address2,
+  input[type="text"].profile_phone_number,
+  input[type="text"].profile_post_code{
+   
+  width: 20vw;
+}
+}
+@media screen and (max-width: 1000px){
+  input[type="text"].profile_first_name,
+  input[type="text"].profile_last_name,
+  input[type="text"].profile_username,
+  input[type="text"].profile_email,
+  input[type="text"].profile_organization,
+  input[type="text"].profile_address1,
+  input[type="text"].profile_address2,
+  input[type="text"].profile_phone_number,
+  input[type="text"].profile_post_code{
+  width: 33vw;
+}
+}
+@media screen and (max-width: 850px){
+  input[type="text"].profile_first_name,
+  input[type="text"].profile_last_name,
+  input[type="text"].profile_username,
+  input[type="text"].profile_email,
+  input[type="text"].profile_organization,
+  input[type="text"].profile_address1,
+  input[type="text"].profile_address2,
+  input[type="text"].profile_phone_number,
+  input[type="text"].profile_post_code{
+   
+    width: 42vw;
+}
+}
+@media only screen and (max-width: 800px){
+  input[type="text"].profile_first_name,
+  input[type="text"].profile_last_name,
+  input[type="text"].profile_username,
+  input[type="text"].profile_email,
+  input[type="text"].profile_organization,
+  input[type="text"].profile_address1,
+  input[type="text"].profile_address2,
+  input[type="text"].profile_phone_number,
+  input[type="text"].profile_post_code{
+   
+  width: 48vw;
+}
+}
+
+@media only screen and (max-width: 600px){
+  input[type="text"].profile_first_name,
+  input[type="text"].profile_last_name,
+  input[type="text"].profile_username,
+  input[type="text"].profile_email,
+  input[type="text"].profile_organization,
+  input[type="text"].profile_address1,
+  input[type="text"].profile_address2,
+  input[type="text"].profile_phone_number,
+  input[type="text"].profile_post_code{
+  width: 54vw;
+}
+}
+
+@media only screen and (max-width: 480px){
+  input[type="text"].profile_first_name,
+  input[type="text"].profile_last_name,
+  input[type="text"].profile_username,
+  input[type="text"].profile_email,
+  input[type="text"].profile_organization,
+  input[type="text"].profile_address1,
+  input[type="text"].profile_address2,
+  input[type="text"].profile_phone_number,
+  input[type="text"].profile_post_code{
+  width: 64vw;
+}
+}
+
+.profilecheck{
+
+  padding:2vw;
+  
+}
+input[type="text"].shopping-name,
+input[type="text"].shopping-phone,
+input[type="text"].shopping-lastname,
+input[type="text"].shopping-address1,
+input[type="text"].shopping-address2,
+input[type="text"].shopping-phone,
+input[type="text"].shopping-postcode,
 .selectedit{
 	width: 100%;
 	padding: 12px 20px;
@@ -796,34 +965,64 @@ input[type="email"],
 	box-sizing: border-box;
 }
 @media only screen and (max-width: 1600px){
-  input[type="text"],
+  input[type="text"].shopping-name,
+  input[type="text"].shopping-phone,
+  input[type="text"].shopping-lastname,
+  input[type="text"].shopping-address1,
+  input[type="text"].shopping-address2,
+  input[type="text"].shopping-phone,
+  input[type="text"].shopping-postcode,
 .selectedit{ 
    
   width: 30vw;
 }
 }
 @media only screen and (max-width: 1555px){
-  input[type="text"],
+  input[type="text"].shopping-name,
+input[type="text"].shopping-phone,
+input[type="text"].shopping-lastname,
+input[type="text"].shopping-address1,
+input[type="text"].shopping-address2,
+input[type="text"].shopping-phone,
+input[type="text"].shopping-postcode,
 .selectedit{ 
    
   width: 40vw;
 }
 }
 @media screen and (max-width: 1000px){
-input[type="text"],
+  input[type="text"].shopping-name,
+  input[type="text"].shopping-phone,
+  input[type="text"].shopping-lastname,
+  input[type="text"].shopping-address1,
+  input[type="text"].shopping-address2,
+  input[type="text"].shopping-phone,
+  input[type="text"].shopping-postcode,
 .selectedit{
   width: 53vw;
 }
 }
 @media screen and (max-width: 850px){
-input[type="text"],
+  input[type="text"].shopping-name,
+  input[type="text"].shopping-phone,
+  input[type="text"].shopping-lastname,
+  input[type="text"].shopping-address1,
+  input[type="text"].shopping-address2,
+  input[type="text"].shopping-phone,
+  input[type="text"].shopping-postcode,
 .selectedit{ 
    
     width: 62vw;
 }
 }
 @media only screen and (max-width: 800px){
-  input[type="text"],
+  input[type="text"].shopping-name,
+input[type="text"].shopping-phone,
+input[type="text"].shopping-lastname,
+input[type="text"].shopping-address1,
+input[type="text"].shopping-address2,
+input[type="text"].shopping-phone,
+input[type="text"].shopping-postcode,
 .selectedit{ 
    
   width: 60vw;
@@ -831,7 +1030,13 @@ input[type="text"],
 }
 
 @media only screen and (max-width: 600px){
-  input[type="text"],
+  input[type="text"].shopping-name,
+  input[type="text"].shopping-phone,
+  input[type="text"].shopping-lastname,
+  input[type="text"].shopping-address1,
+  input[type="text"].shopping-address2,
+  input[type="text"].shopping-phone,
+  input[type="text"].shopping-postcode,
 .selectedit{ 
    
   width: 80vw;
@@ -1305,12 +1510,14 @@ label.profilelabel{
   padding:1vw;
   width:30vw;
   margin-left:4vw;
+  width:45vw;
+  
   
 }
 @media screen and (max-width: 1555px) {
   .profilecheckbox{
   margin:0;
-  width:40vw;
+  width:30vw;
   }
 }
 @media screen and (max-width: 1000px) {

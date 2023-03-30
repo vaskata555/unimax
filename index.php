@@ -172,17 +172,6 @@
 <?php include 'itemshow.php';?>
 
 
-<!-- <?php $sql = "SELECT * FROM users";
- $result = mysqli_query($db, $sql);
-  $rowCount = mysqli_num_rows($result); 
-if ($rowCount > 0) {
-   while ($row = mysqli_fetch_assoc($result)) {
-      echo $row['username'] .'<br>'. $row['password'];
-   }
-  }else {
-    echo "No results found.";
-   } 
-  ?> -->
 </div>
 <div class="bg"></div>
 <div class="bg bg2"></div>

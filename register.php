@@ -7,7 +7,7 @@ require_once 'templates/header.php';
 <script src='background.js'defer></script>
 <div class="enterform">
     <div class="centerform">
-        <div class="insideform">
+        <div class="insideformregister">
     <form action="templates/register-inc.php" method="post">
         
    <!-- <span class="input">    
@@ -19,14 +19,15 @@ require_once 'templates/header.php';
 	</span>
 -->
 <div class="registration">
+  <div class="insideregister"
   <form>
   
-    <label>Your email</label>
+    <label>Your email:</label><br>
     <input type="email" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" name="email"placeholder="Email" required >
     <p class="error">
       
     </p>
-    <label>Your Username</label>
+    <label>Your Username:</label><br>
     <input type="text" name="username" placeholder="Username" required><br>
     <p class="error">
      
@@ -44,13 +45,13 @@ require_once 'templates/header.php';
       <label for="phone_number">Phone Number:</label><br>
 			<input type="text" id="phone_number" name="phone_number" required><br>
 
-    <label>Password</label>
+    <label>Password</label><br>
     <input type="password" name="password" placeholder="Password">
     <p class="error">
       <span>At least 8 characters</span>
     </p>
 
-    <label>Password [repeat]</label>
+    <label>Password [repeat]</label><br>
     <input type="password" name="confirmPassword" placeholder="Confirm password">
     
    
@@ -61,6 +62,7 @@ require_once 'templates/header.php';
   </form>
 </div>
     </form>
+</div>
 </div>
 </div>
 </div>

@@ -30,6 +30,7 @@ if (isset($_POST['submit1'])) {
             $code = $product["code"];
         $price = $product["price"];
         $title = $product["title"]; 
+        $id_product=$product["id"];
         $quantity = $product["quantity"]; 
         echo "$post_code";
         $shopid = $_SESSION['sessionId'];
@@ -45,7 +46,10 @@ if (isset($_POST['submit1'])) {
         $currentDateTime = date('YmdHis');
         $randomNumber = mt_rand(1, 9999);
         $order_number = $currentDateTime . '-' . $randomNumber;
+        $order_date = date("Y-m-d");
 
+        // Generate the warranty date
+        $warranty_date = date("Y-m-d", strtotime("+1 year"));
         $email = $user["email"];
         $phone_number = $user["phone_number"];
         $username = $user["username"];
@@ -54,11 +58,11 @@ if (isset($_POST['submit1'])) {
         $last_name = $user["last_name"];
         
        
-        $sql = "INSERT INTO payment_info (order_number, email, phone_number, username,organization,first_name,last_name,code,quantity,price,title,total_price,address1,address2,post_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO payment_info (order_number,order_date,warranty_date,user_id, email, phone_number, username,organization,first_name,last_name,id_product,code,quantity,price,title,total_price,address1,address2,post_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($db, $sql);
         foreach ($_SESSION["shopping_cart"] as $key => $value) {
             
-            mysqli_stmt_bind_param($stmt, "sssssssssssssss", $order_number, $email, $phone_number, $username, $organization, $first_name, $last_name, $value["code"],$value["quantity"], $value["price"], $value["title"], $total_price, $address1, $address2, $post_code);
+            mysqli_stmt_bind_param($stmt, "sssssssssssssssssss", $order_number,$order_date,$warranty_date,$shopid, $email, $phone_number, $username, $organization, $first_name, $last_name,$id_product, $value["code"],$value["quantity"], $value["price"], $value["title"], $total_price, $address1, $address2, $post_code);
             mysqli_stmt_execute($stmt);
             
         }
