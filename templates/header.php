@@ -1,4 +1,5 @@
 <?php require_once 'dbConfig.php'; 
+//session_set_cookie_params(0);
 session_start();
 
 ?>
@@ -39,6 +40,14 @@ if (isset($_SESSION['sessionId'])) {
  $type = $_SESSION['sessionUsertype'];
 if($type=='admin'||$type=='user'||$type=='manager'){
    echo '<a href='.'profile.php'.'>'.'Профил'.'</a>';
+}
+}
+?>
+ <?php
+if (isset($_SESSION['sessionId'])) {
+ $type = $_SESSION['sessionUsertype'];
+if($type=='admin'||$type=='user'||$type=='manager'){
+   echo '<a href='.'appointment.php'.'>'.'book appointment'.'</a>';
 }
 }
 ?>

@@ -1,6 +1,9 @@
 <?php include('templates/header.php');
      include('templates/footer.php');
-    
+   
+   //  include("pChart2.1.4/class/pData.class.php");
+    // include("pChart2.1.4/class/pDraw.class.php");
+   //  include("pChart2.1.4/class/pImage.class.php");
     ?> 
 <?php
 $type = $_SESSION['sessionUsertype'];
@@ -19,17 +22,19 @@ $type = $_SESSION['sessionUsertype'];
 			<li><a href="useroverview.php">Users</a></li>
 			<li><a href="productsoverview.php">Products</a></li>
 			<li><a href="#">Orders</a></li>
+            <li><a href="appointments2.php">Appointments</a></li>
 		</ul>
 	</div>
     <div id="content">
 <div class="firstadminpanel">
     <?php
     if (isset($_SESSION['sessionId'])) {
-
-
-        echo "Hello user: ";
-        echo $_SESSION['sessionUser'];
+        echo"WELCOME ";
         echo $type = $_SESSION['sessionUsertype'];
+        echo"  ";
+        echo $_SESSION['sessionUser'];
+        echo"  ";
+      
         if($type=="admin"){
         echo '<a href="admin_dashboard.php" class="btnbrand">Admin Dashboard</a>';
         echo'  ';
@@ -40,7 +45,9 @@ $type = $_SESSION['sessionUsertype'];
     }
     ?>
     <p>USER NAVIGATION EDITS AND DELETE</p>
-
+    <?php
+phpinfo();
+?>
 
 
 </div>
