@@ -80,6 +80,7 @@ echo $statusMsg;
     <label>Select Image File:</label>
     <input type="file" name="image">
     <input type="text" name="title" value="title">
+    
     <input type="text" name="subject" id="subject" value="short-description">
     <textarea class="textareaupload" name="subject1" id="subject1" wrap="hard" rows="10" cols="85"  value="long-description"></textarea>
   <input type="text" name="price" value="price">

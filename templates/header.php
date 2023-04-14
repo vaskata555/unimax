@@ -51,10 +51,17 @@ if($type=='admin'||$type=='user'||$type=='manager'){
 }
 }
 ?>
-  <a href="login.php" class="login">вход в сайта</a>
-  <a href="register.php" class="register" >регистрация</a>
-  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+<div id="dropdown-header" class="dropdown-header">
+<a href="#"class="dropdown-link"><img src="user.png" width="50px" height="50px"></a>
+<div class="dropdown-header-content">
+  <a href="login.php" >вход в сайта</a>
+  <a href="register.php"  >регистрация</a>
   
+  </div>
+</div>
+<a id="hiddenbutton" href="login.php" >вход в сайта</a>
+<a id="hiddenbutton" href="register.php"  >регистрация</a>
+<a href="javascript:void(0);" class="icon" onclick="myFunction()">
   <i class="fa fa-bars"></i>
   </a>
   
