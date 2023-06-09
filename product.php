@@ -15,7 +15,7 @@
    
 ?>
      <?php include('templates/header.php');
-     include('templates/footer.php');
+    
     
     ?>
      <?php
@@ -30,11 +30,15 @@
 
 
          <?php  $id = $_GET['id'];
-    $result = $db->query("SELECT * FROM images3 where id = $id");
+    $sql = "SELECT * FROM images3 WHERE id = ?";
+    $stmt = mysqli_prepare($db, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
    
      while($row = $result->fetch_assoc() ){ 
          ?>
-         <div class="galleryproduct"> 
+         <div class="galleryproductsuggestion"> 
      <div class="galleryprodutscreen"> 
          
          
@@ -43,8 +47,10 @@
      <br>   
      <div class="wholeproductpage">
      <div class="allimageproductbox">
-    <img class="product-image"  src="data:image/jpg;charset=utf8;base64, <?php echo base64_encode($row['image']);?>" /> 
-          <div class="small-images"> <img   src="data:image/jpg;charset=utf8;base64, <?php echo base64_encode($row['image']);?>" /> </div>
+    <?php $image_unescaped = ($row['image']) ;
+    $image_escaped = str_replace("/","\\",$image_unescaped) ?>
+    <img class="imagebd"  src="<?php echo  $image_escaped ;?>"/>
+         
      </div>
        <div class="producttextcontainer">  <?php echo("<span class=producttextspan >".$row['long_desc']."</span>"); ?></div>
      </div>
@@ -76,8 +82,11 @@ echo"</form>";
 $status="";
 if (isset($_POST['code']) && $_POST['code']!=""){
 $code = $_POST['code'];
-$result = mysqli_query($db,"SELECT * FROM `images3` WHERE `code`='$code'"
-);
+ $sql = "SELECT * FROM `images3` WHERE `code` = ?";
+$stmt = mysqli_prepare($db, $sql);
+mysqli_stmt_bind_param($stmt, "s", $code);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 $row = mysqli_fetch_assoc($result);
 $id_product = $row['id'];
 $title = $row['title'];
@@ -127,3 +136,66 @@ $cart_count = count(array_keys($_SESSION["shopping_cart"]));
 
 ?>
 <?php echo $status;?>
+<?php 
+   $id = $_GET['id'];
+
+  $sql = "SELECT * FROM images3 where id = ?";
+$stmt = mysqli_prepare($db, $sql);
+mysqli_stmt_bind_param($stmt, "s", $id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+
+   while($row = $result->fetch_assoc() ){ 
+    $price = $row['price'];
+    $price1 = $price - 200;
+    $price2 = $price + 200;
+   }
+
+   $sql = "SELECT * FROM images3 WHERE price BETWEEN ? AND ? AND id <> ? LIMIT 4";
+   $stmt = mysqli_prepare($db, $sql);
+   mysqli_stmt_bind_param($stmt, "ddd", $price1, $price2, $id);
+   mysqli_stmt_execute($stmt);
+   $result = mysqli_stmt_get_result($stmt); ?> 
+ 
+ <br>
+
+ <div class="container2suggestion">
+ <div class="container1suggestion">
+  
+ <?php if($result->num_rows > 0){ ?> 
+
+       <?php while($row = mysqli_fetch_assoc($result)){ ?> 
+           
+         <div class="item">
+        <?php $image_unescaped = ($row['image']) ;
+        $image_escaped = str_replace("/","\\",$image_unescaped) ?>
+             <a href='product.php?id=<?= $row['id'] ?>' class="product-link">
+             <img class="imagebdsuggestion"  src="<?php echo  $image_escaped ;?>"/>
+             
+        
+             <div class="overlaysuggestion">
+              <!-- <?php echo ($row['file_name']); ?> -->
+            
+            
+              <div class="textproducts"> <?php echo ($row['short_desc']); ?>
+             </div></div>
+              </div>
+              
+       
+       
+              </a>
+      
+           
+           
+       
+       <?php } ?> 
+       
+       
+
+
+<?php }else{ ?> 
+   <p class="status error">Image(s) not found...</p> 
+<?php } ?>
+</div>
+ </div>
+ <?php  include('templates/footer.php'); ?>

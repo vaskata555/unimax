@@ -1,16 +1,16 @@
 <?php include('templates/header.php');
-     include('templates/footer.php');
     
+    mysqli_set_charset($db, "utf8");
     ?>
     <script src="getcategoryid.js"defer></script>
-  <?php
+<?php
 $type = $_SESSION['sessionUsertype'];
- if (!isset($_SESSION['sessionId']) || $type != "admin" ) {
+if (!isset($_SESSION['sessionId']) || $type != "admin" ) {
         header("Location: ../index.php?error=accessforbiden");
         exit();
     }
 ?>
- <?php
+<?php
     if (isset($_SESSION['sessionId'])) {
 
 
@@ -25,8 +25,8 @@ $type = $_SESSION['sessionUsertype'];
     } else {
         echo "Home";
     }
-   
-   
+
+
 ?>
 <?php 
 // Include the database configuration file  
@@ -38,26 +38,26 @@ $status = $statusMsg = '';
 $status2 = $statusMsg1 = '';
 if(isset($_POST["submit"])){ 
     $status = 'error'; 
-       $category=$_POST['category'];
-       $subcategory=$_POST['subcategory'];
-       $categorycheck=isset($_POST['categorycheck']) ? true : false;
-       $subcategorycheck=isset($_POST['subcategorycheck']) ? true : false;
+    $category=$_POST['category'];
+    $subcategory=$_POST['subcategory'];
+    $categorycheck=isset($_POST['categorycheck']) ? true : false;
+    $subcategorycheck=isset($_POST['subcategorycheck']) ? true : false;
         
-       
-       
-         
-           
+    
+    
+        
+        
             // Insert image content into database 
             if(isset($_POST["categorycheck"])) { 
                 // Get the category value from the form
-               
+            
             
                 // Prepare the SQL query
-                $sql = "SELECT * FROM category WHERE category_name = '$category'";
-            
-                // Execute the SQL query
-                $result = mysqli_query($db, $sql);
-            
+                $sql = "SELECT * FROM category WHERE category_name = ?";
+                $stmt = mysqli_prepare($db, $sql);
+                mysqli_stmt_bind_param($stmt, "s", $category);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
                 // Check if the query returned any rows
                 if (mysqli_num_rows($result) > 0) {
                     // The category already exists
@@ -69,50 +69,52 @@ if(isset($_POST["submit"])){
                     exit();
                 } else {
                     // The category doesn't exist, insert it into the database
-                    $insert = mysqli_query($db, "INSERT into category (category_name) VALUES ('$category')");
-                    if ($insert) {
+                    $insert = mysqli_prepare($db, "INSERT INTO category (category_name) VALUES (?)");
+                    mysqli_stmt_bind_param($insert, "s", $category); 
+                    if (mysqli_stmt_execute($insert)) {
                         echo "Success: Inserted main category.";
                     } else {
                         echo "Error: Failed to insert main category.";
-                        
                     }
+                    
+                    mysqli_stmt_close($insert);
                 }
             
-            if($insert){ 
-                $status = 'success'; 
-                $statusMsg = "Category Created successfully."; 
-            }else{ 
-                $statusMsg = "Category upload failed, please try again."; 
-            }  
+           
         
             }
             if(isset($_POST["subcategorycheck"])){ 
-                $sql = "SELECT * FROM subcategory WHERE subcategory_name = '$subcategory'";
-            
+                $sql = "SELECT * FROM subcategory WHERE subcategory_name = ?";
+                $stmt = mysqli_prepare($db, $sql);
+                mysqli_stmt_bind_param($stmt, "s", $subcategory);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
                 // Execute the SQL query
-                $result = mysqli_query($db, $sql);
+                
             
                 // Check if the query returned any rows
                 if (mysqli_num_rows($result) > 0) {
                     // The category already exists
                     echo "<br>";
-                     echo "<div class='contentupload'>";
+                    echo "<div class='contentupload'>";
                     echo "Грешка: подкатегорията същестува ";
                     echo"<a href='createcategories.php'>Натисни тук за да опиташ отново</a>";
                     echo "</div>";
                     exit();
                 } else {
-            $insert2 = $db->query("INSERT into subcategory (subcategory_name) VALUES ('$subcategory')"); 
+            $insert2  = mysqli_prepare($db, "INSERT into subcategory (subcategory_name) VALUES (?)"); 
+            mysqli_stmt_bind_param($insert2, "s", $subcategory); 
                 }
-            if($insert2){ 
+            if(mysqli_stmt_execute($insert2)){ 
                 $status1 = 'success'; 
                 $statusMsg1 = "SUBCategory Created successfully."; 
             }else{ 
                 $statusMsg1 = "SUBCategory upload failed, please try again."; 
             } 
+            mysqli_stmt_close($insert2);
             }
-           
-           
+        
+        
         
     }else{ 
         $statusMsg = 'моля въведете категория'; 
@@ -132,6 +134,7 @@ echo $statusMsg1;
 <html>
 <body>
 <div class="contentupload">
+    
 <form action="" method="post">
     <label>add cateogory/subcategory</label>
 
@@ -143,6 +146,7 @@ echo $statusMsg1;
     <br>
     <input type="submit" name="submit" value="Upload">
 </form>
+
 </div>
 <div class="categoryupload">
     <div class="uploadmaincategory">
@@ -151,56 +155,55 @@ echo $statusMsg1;
 $result = mysqli_query($db,$sql);
 
 if(mysqli_num_rows($result)>0){
-    foreach($result as $row){
+   
 ?> 
 <p>избери категория</p>
-  <select name='category-select' id='category-select' size="15"style="height: 100%">
+<select name='category-select' id='category-select' size="15" style="height: 100%">
     <?php
-      while ($row = mysqli_fetch_assoc($result)) {
+    while ($row = mysqli_fetch_assoc($result)) {
         echo "<option value='" . $row['category_name'] . "' categoryid='" . $row['id'] . "'>" . $row['category_name'] . "</option>";
-      }
-    ?>
-  </select>
-<?php
     }
+    ?>
+</select>
+<?php
+    
 }
 ?>
 </div>
- <div class="uploadmainsubcategory">
+<div class="uploadmainsubcategory">
 <?php $sql1 = "SELECT * FROM subcategory ";
 
 $result1 = mysqli_query($db,$sql1);
 
 if(mysqli_num_rows($result1)>0){
-    foreach($result1 as $row1){
-
+   
 ?>  
 <p>избери подкатегория</p>
-  <select name='subcategory-select' id='subcategory-select' size="15"style="height: 100%">
+<select name='subcategory-select' id='subcategory-select' size="15"style="height: 100%">
     <?php
-      while ($row1 = mysqli_fetch_assoc($result1)) {
+    while ($row1 = mysqli_fetch_assoc($result1)) {
         echo "<option value='" . $row1['subcategory_name'] . "' subcategoryid='" . $row1['id'] . "'>" . $row1['subcategory_name'] . "</option>";
-         
-      }
+        
+    }
     ?>
-  </select>
-  
+</select>
+
 
 
 
 
 <?php
-    }
+    
 }
 ?>
 </div>
 <div class="uploadcategorymap">
-    <form method="POST">
+    <form  method="POST">
     <br>
-     <input type='text' class='createcategorysubmit' name='category-chosen' value=''>
-     <input type='text' class='categoryid' name='categoryid' value=''>
-     <br>
-     <input type='text' class='createcategorysubmit' name='subcategory-chosen' value=''>
+    <input type='text' class='createcategorysubmit' name='category-chosen' value=''>
+    <input type='text' class='categoryid' name='categoryid' value=''>
+    <br>
+    <input type='text' class='createcategorysubmit' name='subcategory-chosen' value=''>
     <input type='text' class='categoryid' name='subcategoryid' value=''>
     <br>
     <input name='submitcategorycombo' type="submit">
@@ -215,13 +218,21 @@ if(isset($_POST["submitcategorycombo"])){
     // Get the selected subcategory IDs
     $subcategory_id = $_POST['subcategoryid'];
     $subcategory_name = $_POST['subcategory-chosen'];
-    echo"категория: ".$category_name. " и субкатегория:".$subcategory_name." бяха разрешени" ;
+   
     // Insert the data into the "category_subcategory_map" table
+
+    $sql = mysqli_prepare($db,  "INSERT INTO category_subcategory(category_id, subcategory_id) VALUES (?,?)");
+    mysqli_stmt_bind_param($sql, "ii",$category_id,$subcategory_id); 
+
+if(mysqli_stmt_execute($sql)){ 
+    echo"категория: ".$category_name. " и субкатегория:".$subcategory_name." бяха разрешени" ;
+}else{ 
+    echo "грешка категориите не бяха добавени";
+} 
+mysqli_stmt_close($sql);
   
-      $sql = "INSERT INTO category_subcategory(category_id, subcategory_id) VALUES ('$category_id', '  $subcategory_id')";
-      mysqli_query($db, $sql);
-    
-}
+}  
+include('templates/footer.php');
     ?>
 </body>
 </html>

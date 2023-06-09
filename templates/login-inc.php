@@ -24,14 +24,15 @@ if (isset($_POST['submit'])) {
             mysqli_stmt_bind_param($stmt, "s", $username);
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
-
+           
             if ($row = mysqli_fetch_assoc($result)) {
                 $passCheck = password_verify($password, $row['password']);
-               
+               $verified = $row['verified'];
                 if ($passCheck == false) {
                     header("Location: ../index.php?error=wrongpass1");
                     exit();
                 } elseif ($passCheck == true) {
+                    if($verified=='1'){
                     session_start();
                     $_SESSION['sessionId'] = $row['id'];
                  $_SESSION['sessionUser'] = $row['username'];
@@ -39,6 +40,9 @@ if (isset($_POST['submit'])) {
                 
                     header("Location: ../index.php?success=loggedin");
                     exit();
+                    }else{ header("Location: ../login.php?error=notverified");
+                        exit();
+                    }
                 } else {
                     header("Location: ../index.php?error=wrongpass2");
                     exit();

@@ -1,182 +1,104 @@
 <!DOCTYPE html>
+<?php include('templates/header.php'); ?>
 <html lang="en">
-<head>
-
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-  <script src='banner.js'defer></script>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
-
-</head>
-<body>
-
-
-    <?php include('templates/header.php');
-     include('templates/footer.php');
-    
-    ?>
-    <?php
-    if (isset($_SESSION['sessionId'])) {
-
-
-        echo "Hello: ";
-        echo $_SESSION['sessionUser'];
-        echo'  ';
-        echo $type = $_SESSION['sessionUsertype'];
-        echo'  ';
-        if($type=="admin"){
-        echo '<a href="admin_dashboard.php" class="btnbrand">Admin Dashboard</a>';
-        echo'  ';
-        echo '<a href="upload.php" class="btnbrand">upload product</a>';
-        }
-    } else {
-        echo "Home";
-    }
-   
-   
-?>
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <script src='banner.js'defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+   </head>
+   <body>
+      <div class="loggedpanel">
+         <?php
+            if (isset($_SESSION['sessionId'])) {
+                echo "Hello: ";
+                echo $_SESSION['sessionUser'];
+                echo'  ';
+                echo $type = $_SESSION['sessionUsertype'];
+                echo'  ';
+                if ($type == "admin") {
+                    echo '<a href="admin_dashboard.php" class="btnbrand">Admin Dashboard</a>';
+                    echo'  ';
+                    echo '<a href="upload.php" class="btnbrand">upload product</a>';
+                }
+            } else {
+                echo "";
+            }
+            ?>
+      </div>
+      <div class="slideshow-container">
+         <div class="mySlides">
+            <img id="banner-1"src="test1.jpg">
+            <div class="top-right"><p class="top-righttext">Унимакс - решения за вашият бизнес</p></div>
+            <div class="top-right2"><p class="top-righttext2">Намерете подходящо устройство <br>за вашите търговски цели</p></div>
+         </div>
+         <div class="mySlides fade">
+            <img id="banner-2" src="camera.gif">
+         </div>
+         <div class="mySlides fade">
+            <img  id="banner-3"src="system.gif">
+         </div>
+      </div>
+      <div style="text-align:center">
+         <span class="dot"></span> 
+         <span class="dot"></span> 
+         <span class="dot"></span> 
+      </div>
+      <div class="content">
+         
+            
+        
+         <div class="article">
+            
+         <div class="flex-box">
+        
+  <div class="small-article">
+  <img src="img\icons8-task-100.png">
+  <h5>Персонализиран подход</h5>
  
-
-  
-<div class="slideshow-container">
-    
-    <div class="mySlides">
-    <img src="post.gif" >
-      
-      
-    </div>
-    
-    <div class="mySlides fade">
-      
-      <img src="camera.gif" >
-      
-    </div>
-    
-    <div class="mySlides fade">
-      
-      <img src="system.gif" >
-    </div>
-    
-    
-</div>
-    <div style="text-align:center">
-      <span class="dot"></span> 
-      <span class="dot"></span> 
-      <span class="dot"></span> 
-    </div>
-  
-    <div class="content">
- <div class="container2">
-
-
-  
- <div class="minigallery">
- <a href=file.php>
- <img src="pc2.jpg">
- <div class="overlay1">
- 
-     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
-      </div></div></div>
-      </a>
-  <div class="minigallery">
-  <a href=file.php>
- <img src="pc2.jpg">
- <div class="overlay1">
- 
-     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
-  </div></div></div>
-  </a>
-  <div class="minigallery">
-  <a href=file.php>
- <img src="pc2.jpg">
- <div class="overlay1">
- 
-     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
-  </div></div></div>
-  </a>   
-  <div class="minigallery">
-  <a href=file.php>
- <img src="pc2.jpg">
- <div class="overlay1">
- 
-     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
-  </div></div></div>
-  </a>
-  <div class="minigallery">
-  <a href=file.php>
- <img src="pc2.jpg">
- <div class="overlay1">
- 
-     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
-  </div></div></div>
-  </a>   
-  <div class="minigallery">
-  <a href=file.php>
- <img src="pc2.jpg">
- <div class="overlay1">
- 
-     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
-  </div></div></div>
-  </a>
-  <div class="minigallery">
-  <a href=file.php>
- <img src="pc2.jpg">
- <div class="overlay1">
- 
-     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
-  </div></div></div>
-  </a>  
-  <div class="minigallery">
- <a href=file.php>
- <img src="pc2.jpg">
- <div class="overlay1">
- 
-     <div class="text1">  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et vulputate arcu. Nam quis mauris metus. Maecenas placerat condimentum metus, sit amet rhoncus odio tempor eget. Nulla rhoncus, sapien ut dictum eleifend, nisi sem elementum ex, quis venenatis mauris lacus at libero.<br> <button class="burrongrid" >Вижте повече</button>
-  </div></div></div>
-  </a>
-  
-    
- <?php
- if(isset($_POST["txtstartdate"], $_POST["txtenddate"]))  {
-  $txtstartdate = date ($_POST['txtstartdate']);
-  $txtenddate=date ($_POST['txtenddate']);
- $result = $db->query("SELECT id,image,file_name,uploaded,short_desc,long_desc FROM images3 WHERE 
- uploaded BETWEEN '".$txtstartdate."' AND '".$txtenddate."'"); 
-
- }else{
-  $result = $db->query("SELECT id,image,file_name,uploaded,short_desc,long_desc FROM images3 ORDER BY uploaded DESC");
- } 
- if(isset($_POST["reset"])){
-  $result = $db->query("SELECT id,image,file_name,uploaded,short_desc,long_desc FROM images3 ORDER BY uploaded DESC");
- } ?>
-</div>
-<div class="placement">
-    <div class="dropdown">
-  <button class="dropbtn">Filter <img src="filter2.png" height="12px" width="12px"></button>
-  
-  <div class="dropdown-content">
-   <form method="post">
-     
-     <input type="date" id="txtstartdate"  name="txtstartdate">
-     <input type="date" id="txtenddate" name="txtenddate">
-     <input type="submit" name="search" id="search" value="search between dates" >
-     <input type="submit" id="reset" name="reset" value="Reset" />
-  </form>
-  </div>
- </div>
- </div>
-<?php include 'itemshow.php';?>
-
+  <b class="info-p">Държим много на нашите клиенти и предлагаме<br> специализиран подход в изработката<br> и поддръжката на системи<br> за търговия и видео наблюдение</b>
 
 </div>
-<div class="bg"></div>
-<div class="bg bg2"></div>
-<div class="bg bg3"></div>
-</body>
+
+<div class="small-article">
+  <img src="img\icons8-cash-register-100.png">
+  <h5>Асортимент от продукти</h5>
+ 
+  <b class="info-p">Богатият избор от продукти,<br> предлагани от Унимакс ООД,<br> включва касови апарати, фискални принтери,<br>  ФУВАС системи и други бизнес решения.</b>
+
+</div>
+<div class="small-article">
+  <img src="img\icons8-service-100.png">
+  <h5>Поддъжка и сервиз</h5>
+ 
+  <b class="info-p">Kaчествена поддъжка и лицензиран сервиз.<br>Вярваме в качественото обслужване и сме<br> готови да отговорим на вашите нужди,<br>като гарантираме бърза и ефективна работа</b>
+
+</div>
+</div>
+         </div>
+         <div class="container2">
+         
+            <?php
+               $result = $db->query("SELECT i.id,i.image,i.file_name, i.title,i.short_desc,i.long_desc, COUNT(*)
+               FROM images3 i
+               JOIN payment_info p ON i.id = p.id_product
+               GROUP BY i.id
+               ORDER BY COUNT(*) DESC
+               LIMIT 3;");
+               //mqsto za otdelenie
+               ?>
+              <div class="top-product">
+<p><b>Нашите топ продукти<b></p>
+          </div>
+         
+         <?php include 'itemshow.php';?>
+      </div>
+      
+      <div class="bg"></div>
+      <div class="bg bg2"></div>
+      <div class="bg bg3"></div>
+   </body>
+   <?php include('templates/footer.php'); ?>
 </html>
-
-

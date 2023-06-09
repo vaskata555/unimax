@@ -1,6 +1,6 @@
 <?php  
 include ('templates/header.php');
-include ('templates/footer.php');
+
 
 
 ?>
@@ -112,12 +112,20 @@ margin: auto;
                 Perspiciatis, porro!</p>
         </div>
     </div>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
 </section>
 </div>
 
 
 </main>
+<?php include ('templates/footer.php'); ?>
 <div class="content">
+
 
 <div class="bg"></div>
 <div class="bg bg2"></div>

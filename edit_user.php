@@ -1,15 +1,17 @@
 <?php 
  include('templates/header.php');
- include('templates/footer.php');
+
 // Connect to database
  // Check connection
  if (!$db) {
     die("Connection failed: " . mysqli_connect_error());
 }
 $id = $_GET['id'];
-$sql = "SELECT * FROM users1 WHERE id = $id";
-
-$result = mysqli_query($db,$sql);
+$sql = "SELECT * FROM users1 WHERE id = ?";
+$stmt = mysqli_prepare($db, $sql);
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
 //echo"<div class='floatingvalue'>";
 //while($row = $result1->fetch_assoc() ){
@@ -49,17 +51,17 @@ if(mysqli_num_rows($result)>0){
 			<input type="text" id="phone_number" name="phone_number" value="<?php echo $row['phone_number'];?>" required><br>
       
 			<label for="type">User Type:</label><br>
-			<select class="selectedit" id="type" name="type" required>
+			<select class="selectedituser" id="type" name="type" required>
 				<option value="">Select a user type</option>
 				<option value="admin">Admin</option>
 				<option value="moderator">Moderator</option>
 				<option value="user">User</option>
 			</select><br>
-
-			<input class="submitedit" id="submit" name="submit" type="submit" value="Apply Changes">
-			
+			<br>
+			<input class="submitedituser" id="submit" name="submit" type="submit" value="Apply Changes">
+			<input type="button" onclick="window.location.href='admin_dashboard.php';" class="submitedituser" value="Go to Dashboard"/>
       </form>
-	  <input type="button" onclick="window.location.href='admin_dashboard.php';" class="submitedit" value="Go to Dashboard"/>
+	
 	</div>
 	<?php
  }
@@ -74,8 +76,10 @@ if (isset($_POST["submit"])) {
 	$phone_number = $_POST['phone_number'];
    
 	// Update user information in the database
-	$sql = "UPDATE users1 SET username = '$username', email = '$email', organization = '$organization', first_name = '$first_name', last_name = '$last_name', phone_number = '$phone_number' WHERE id = '$id'";
-	mysqli_query($db, $sql);
-	
+	$sql = "UPDATE users1 SET username = ?, email = ?, organization = ?, first_name = ?, last_name = ?, phone_number = ? WHERE id = ?";
+	$stmt = mysqli_prepare($db, $sql);
+	mysqli_stmt_bind_param($stmt, "sssssss", $username,$email,$organization,$first_name,$last_name,$phone_number,$id);
+	mysqli_stmt_execute($stmt);
+	$result = mysqli_stmt_get_result($stmt);
   }
 	?>

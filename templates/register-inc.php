@@ -1,5 +1,8 @@
 <?php
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'verification.php';
+require __DIR__ .'/../vendor/autoload.php';
 if (isset($_POST['submit'])) {
     //Add database connection
     require 'dbConfig.php';
@@ -11,7 +14,7 @@ if (isset($_POST['submit'])) {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $phone_number = $_POST['phone_number'];
-   
+    $verificationToken = generateVerificationToken();
 
     if (empty($username) || empty($password) || empty($confirmPass) || empty($email)||empty($first_name)||empty($last_name)||empty($phone_number)) {
         header("Location: ../register.php?error=emptyfields&username=".$username);
@@ -47,25 +50,33 @@ if (isset($_POST['submit'])) {
           
         
         
-    }
-    else {
-        $sql = "SELECT username FROM users1 WHERE username = ?";
-        $stmt = mysqli_stmt_init($db);
-        if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ../register.php?error=sqlerror");
-            exit();
         } else {
-            mysqli_stmt_bind_param($stmt, "s", $username);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_store_result($stmt);
-            $rowCount = mysqli_stmt_num_rows($stmt);
-
-            if ($rowCount > 0) {
-                header("Location: ../register.php?error=usernametaken");
+            $sql = "SELECT username, email FROM users1 WHERE username = ? OR email = ?";
+            $stmt = mysqli_stmt_init($db);
+            if (!mysqli_stmt_prepare($stmt, $sql)) {
+                header("Location: ../register.php?error=sqlerror");
                 exit();
             } else {
+                mysqli_stmt_bind_param($stmt, "ss", $username, $email);
+                mysqli_stmt_execute($stmt);
+                mysqli_stmt_store_result($stmt);
+                $rowCount = mysqli_stmt_num_rows($stmt);
+        
+                if ($rowCount > 0) {
+                    mysqli_stmt_bind_result($stmt, $existingUsername, $existingEmail);
+                    while (mysqli_stmt_fetch($stmt)) {
+                        if ($existingUsername === $username) {
+                            header("Location: ../register.php?error=usernametaken");
+                            exit();
+                        }
+                        if ($existingEmail === $email) {
+                            header("Location: ../register.php?error=emailtaken");
+                            exit();
+                        }
+                    }
+                } else {
                 $type = "user";
-                $sql = "INSERT INTO users1 (email, username, password,type,organization,first_name,last_name,phone_number) VALUES (? ,? ,? ,? ,? ,? ,? ,?)";
+                $sql = "INSERT INTO users1 (verification_token,email, username, password,type,organization,first_name,last_name,phone_number) VALUES (? ,? ,? ,? ,? ,? ,? ,? ,?)";
                 $stmt = mysqli_stmt_init($db);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
                     header("Location: ../register.php?error=sqlerror");
@@ -73,15 +84,48 @@ if (isset($_POST['submit'])) {
                 } else {
                     $hashedPass = password_hash($password, PASSWORD_DEFAULT);
 
-                    mysqli_stmt_bind_param($stmt, "ssssssss",$email, $username, $hashedPass,$type,$organization,$first_name,$last_name,$phone_number);
+                    mysqli_stmt_bind_param($stmt, "sssssssss",$verificationToken,$email, $username, $hashedPass,$type,$organization,$first_name,$last_name,$phone_number);
                     mysqli_stmt_execute($stmt);
-                        header("Location: ../register.php?succes=registered");
+                    $phpmailer = new PHPMailer(true);
+                    $phpmailer->CharSet = 'UTF-8';
+
+try {
+    // Configure PHPMailer for SMTP
+    $phpmailer->isSMTP();
+    $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
+    $phpmailer->SMTPAuth = true;
+    $phpmailer->Port = 2525;
+    $phpmailer->Username = '31792ac26691f8';
+    $phpmailer->Password = '21ed3c0733371a';
+
+    // Set email details
+    $phpmailer->setFrom('sender@example.com', 'Sender Name');
+    $phpmailer->addAddress($email, $username); // Use the registered user's email and username
+    $phpmailer->Subject = 'Email/Registration Verification Unimax.com ';
+    $phpmailer->Body = 'Здравейте'." " . $first_name ." " .$last_name ."," . ' <br>Благодарим ви за направената регистрация!<br> Потвърдете варшият акаунт
+    За да гарантираме сигурността на вашия акаунт и за да потвърдим вашият имейл адрес. Цъкнете тук: <a href="localhost/unimax/verify.php?token=' . $verificationToken . '">Потвърди имейл</a><br>Ако имате някакви въпроси или срещнете проблеми по време на процеса на регистрация,<br> моля не се колебайте да се свържете с нашия приятелски екип за поддръжка на [Имейл/Контактна информация].<br>
+
+    Очакваме ви.<br> <br>
+    
+    екип на Унимакс ООД<br>
+    телефон: <br>
+    email:
+    ';
+    $phpmailer->isHTML(true);
+
+    // Send the email
+    $phpmailer->send();
+
+    echo 'Verification email sent successfully!';
+} catch (Exception $e) {
+    echo 'Verification email could not be sent. Error: ', $phpmailer->ErrorInfo;
+}
+                        header("Location: ../register.php?success=registered");
                         exit();
                 }
             }
         }
     }
-    mysqli_stmt_close($stmt);
-    mysqli_close($db);
+   
 }
 ?>

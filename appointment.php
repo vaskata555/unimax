@@ -1,8 +1,13 @@
 <?php
 require_once 'templates/header.php';
-require_once 'templates/footer.php';
+
+
+
 
 ?>
+<meta http-equiv="content-type" content="text/html; charset=windows-1251">
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="wrapper">
 <div class="flexplacer">
@@ -10,12 +15,20 @@ require_once 'templates/footer.php';
     <?php
   // shopping cart is not empty, display the div
   $shopid =$_SESSION['sessionId'];
-  $sql = "SELECT * FROM users1 WHERE id = $shopid";
-  $sql1 = "SELECT * FROM payment_info WHERE user_id = $shopid";
-  $result = mysqli_query($db,$sql);
-  $result1 = mysqli_query($db,$sql1);
+  
+  $sql = "SELECT * FROM users1 WHERE id = ?";
+  $stmt = mysqli_prepare($db, $sql);
+mysqli_stmt_bind_param($stmt, "i", $shopid);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+  $sql1 = "SELECT DISTINCT title,warranty_date FROM payment_info WHERE user_id = ? ";
+  $stmt1 = mysqli_prepare($db, $sql1);
+  mysqli_stmt_bind_param($stmt1, "i", $shopid);
+  mysqli_stmt_execute($stmt1);
+  $result1 = mysqli_stmt_get_result($stmt1);
   if (isset($_POST['date'])) {
     $date = $_POST['date'];
+ 
 } else {
     $date = date("Y-m-d");
 }
@@ -57,6 +70,7 @@ require_once 'templates/footer.php';
             <label class="profilelabel">Име на продукт</label><br>
             <?php   echo "<select name='product-select' id='product-select'>";
             echo '<option value="" disabled selected>Select your product</option>';
+          
 while ($row1 = mysqli_fetch_assoc($result1)) {
     echo "<option value='" . $row1['title'] . "' data-warranty='" . $row1['warranty_date'] . "'>" . $row1['title'] . "</option>";
 }
@@ -64,7 +78,7 @@ echo "</select>";
 echo"<br>"
 ?>
 <label class="profilelabel">Гаранционен до</label><br>
- <input type="text" id="warranty_date" name="warranty_date" ><br>
+ <input type="text" id="warranty_date" name="warranty_date" readonly ><br>
  <button id="submit" name="submit" type="submit" >Submit</button>
  <input type="hidden" name="selected_time" id="selected_time"  value="" required></input><br>
  <input type="hidden" name="date" class="date" value="<?php echo $date ?>" required></input><br>
@@ -136,8 +150,11 @@ if (mysqli_num_rows($result4) > 0) {
 }
 foreach ($technician_ids as $technician_id) {
     // Query the database for booked appointments on the selected date
-    $sql = "SELECT * FROM appointments WHERE technician_id = $technician_id AND date = '$date'";
-    $result = mysqli_query($db, $sql);
+    $sql = "SELECT * FROM appointments WHERE technician_id = ? AND date = ?";
+    $stmt = mysqli_prepare($db, $sql);
+mysqli_stmt_bind_param($stmt, "is", $technician_id,$date);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
     // Create an array of booked times
     $booked_times = array();
@@ -188,3 +205,4 @@ $count=0;
 </div>
 <script src="gettime.js"defer></script>
 <script src="warrantygetter.js"defer></script>
+<?php require_once 'templates/footer.php';?>

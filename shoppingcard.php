@@ -1,13 +1,17 @@
 <?php include('templates/header.php');
-     include('templates/footer.php');
+
     
     ?> 
+      
     <?php
  $type = $_SESSION['sessionUsertype'];
  if (!isset($_SESSION['sessionId']) || ($type != "user"&&$type !="admin"&&$type !="manager")) {
         header("Location: ../unimax/login.php?error=PleaseLoginToAccessThisPage");
         exit();
+        
+
     }
+    
 ?>
    <?php
 
@@ -35,6 +39,7 @@ if (isset($_POST['action']) && $_POST['action']=="change"){
 }
   	
 }
+
 ?>
 <div class="flex-cart">
  <div class="cart">
@@ -57,8 +62,9 @@ foreach ($_SESSION["shopping_cart"] as $product){
 ?>
 <tr>
 <td>
-
-<img  src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode ($product["image"]); ?>" width="70" height="60" />
+<?php $image_unescaped = ($product['image']) ;
+$image_escaped = str_replace("/","\\",$image_unescaped) ?>
+<img  src="<?php echo  $image_escaped; ?>"width="70" height="60" />
 </td>
 
 <td><?php echo $product["title"]; ?><br />
@@ -96,7 +102,7 @@ $total_price += ($product["price"]*$product["quantity"]);
    var amountt= document.getElementById("t_amount").value; 
         console.log(amountt);
         </script>
-        <script src="payppal-api.js"></script>
+      
 <strong>TOTAL: <?php echo "$".$total_price; ?></strong>
 </td>
 </tr>
@@ -116,9 +122,12 @@ $total_price += ($product["price"]*$product["quantity"]);
 if(isset($_SESSION['shopping_cart']) && !empty($_SESSION['shopping_cart'])) {
   // shopping cart is not empty, display the div
   $shopid =$_SESSION['sessionId'];
-  $sql = "SELECT * FROM users1 WHERE id = $shopid";
+  $sql = "SELECT * FROM users1 WHERE id = ?";
+  $stmt = mysqli_prepare($db, $sql);
+  mysqli_stmt_bind_param($stmt, "i", $shopid);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
 
-$result = mysqli_query($db, $sql);
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
 ?>
@@ -141,22 +150,23 @@ if (mysqli_num_rows($result) > 0) {
   <input type="text" name="post_code" class="shopping-postcode" value="<?php echo $row['post_code'] ?>" required>
 
   <!--<a class="cashpay" href="">-->
-<button type="submit" id="submit1" name="submit1" class="cashpayb">CASH</button>
+<button type="submit" id="submit1" name="submit1" value="submit1" class="cashpayb">Наложен платеж</button>
+<br>
+<br>
+<button type="submit" name="submit2" value="submit2" class="cashpaya" formaction="/unimax/checkout.php" id="btn">Плати с карта</button>
  <!--</a>-->
-
+    </form>
+    <script src="http://js.stripe.com/v3/"></script>
+        <script src="script.js"></script>
+    
+  
 <?php
 }
 }
 }
 ?>
     <!-- Replace "test" with your own sandbox Business account app client ID -->
-    <div class="paypalsize">
-    <div id="paypal-button-container"></div>
    
-   <?php include("public/index.html")?>
-    
-  
-</div>
 </div>
 </div>
 <div style="clear:both;"></div>
@@ -166,3 +176,4 @@ if (mysqli_num_rows($result) > 0) {
 
 </div>
 </div>
+<?php include('templates/footer.php'); ?>

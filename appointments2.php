@@ -1,6 +1,6 @@
 <?php
 require_once 'templates/header.php';
-require_once 'templates/footer.php';
+
 
 ?>
 <?php
@@ -12,13 +12,15 @@ $type = $_SESSION['sessionUsertype'];
 ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="wrapper">
+
 <div class="sidebar">
 		<ul>
-			<li><a href="#">Dashboard</a></li>
+			<li><a href="admin_dashboard.php">Dashboard</a></li>
 			<li><a href="useroverview.php">Users</a></li>
 			<li><a href="productsoverview.php">Products</a></li>
-			<li><a href="#">Orders</a></li>
+			<li><a href="orderoverview.php">Orders</a></li>
             <li><a href="appointments2.php">Appointments</a></li>
+            <li><a href="createcategories.php">Create category</a></li>
 		</ul>
 	</div>
 <div class="flexplaceradmin">
@@ -47,11 +49,12 @@ $sql = "SELECT DISTINCT appointments.id,appointments.date,appointments.time,appo
         JOIN technician ON appointments.technician_id = technician.id
         JOIN users1 ON appointments.user_id = users1.id
         JOIN payment_info ON appointments.user_id = payment_info.user_id
-        WHERE date = '$date'
+        WHERE date = ?
         GROUP BY appointments.id";
-        
-
-$result = mysqli_query($db, $sql);
+     $stmt = mysqli_prepare($db, $sql);
+     mysqli_stmt_bind_param($stmt, "s",$date);
+     mysqli_stmt_execute($stmt);
+     $result = mysqli_stmt_get_result($stmt);
 
 if (!$result) {
     printf("Error: %s\n", mysqli_error($db));
@@ -76,7 +79,7 @@ if (mysqli_num_rows($result) > 0) {
         echo"<td>" .  $row['address1'] . "</td>";
         echo"<td>" .  $row['phone_number'] . "</td>";
         echo"<td>" .  $row['warranty_date'] . "</td>";
-        echo "<td><a href='edit_user.php?id=".$row['id']."'class='adminbutton''". "'>Edit</a> | <a href='delete.php?id=" . $row['id'] . "'>Delete</a></td>";
+        echo "<td> <a href='deleteapp.php?id=" . $row['id'] . "'>Delete</a></td>";
       
         echo "</tr>";
     }
@@ -86,4 +89,7 @@ if (mysqli_num_rows($result) > 0) {
 }
   
 ?>
+</div>
+</div>
+</div>
 

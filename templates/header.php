@@ -31,7 +31,7 @@ user-scalable=no">
 if (isset($_SESSION['sessionId'])) {
  $type = $_SESSION['sessionUsertype'];
 if($type=='admin'||$type=='user'||$type=='manager'){
-   echo '<a href='.'shoppingcard.php'.'>'.'Количка'.'</a>';
+   echo '<a href='.'shoppingcard.php'.'>'.'<i class="fa fa-shopping-cart"aria-hidden="true"></i>'.' Количка'.'</a>';
 }
 }
 ?>
@@ -54,8 +54,8 @@ if($type=='admin'||$type=='user'||$type=='manager'){
 <div id="dropdown-header" class="dropdown-header">
 <a href="#"class="dropdown-link"><img src="user.png" width="50px" height="50px"></a>
 <div class="dropdown-header-content">
-  <a href="login.php" >вход в сайта</a>
-  <a href="register.php"  >регистрация</a>
+  <a class="linklg"href="login.php"  >вход в сайта</a>
+  <a class="linklg" href="register.php"  >регистрация</a>
   
   </div>
 </div>

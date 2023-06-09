@@ -1,5 +1,5 @@
 <?php include('templates/header.php');
-     include('templates/footer.php');
+     
    
      
     ?> 
@@ -18,10 +18,10 @@ $type = $_SESSION['sessionUsertype'];
 
 <div class="sidebar">
 		<ul>
-			<li><a href="#">Dashboard</a></li>
+			<li><a href="admin_dashboard.php">Dashboard</a></li>
 			<li><a href="useroverview.php">Users</a></li>
 			<li><a href="productsoverview.php">Products</a></li>
-			<li><a href="#">Orders</a></li>
+			<li><a href="orderoverview.php">Orders</a></li>
             <li><a href="appointments2.php">Appointments</a></li>
             <li><a href="createcategories.php">Create category</a></li>
 		</ul>
@@ -63,9 +63,10 @@ $type = $_SESSION['sessionUsertype'];
     var data = google.visualization.arrayToDataTable([
       ['title', 'quantity'],
       <?php
-      $sql = "SELECT title, SUM(quantity) as quantity 
+      $sql = "SELECT images3.title, SUM(payment_info.quantity) as quantity             
               FROM payment_info 
-              GROUP BY title";
+              JOIN images3 ON payment_info.id_product = images3.id  
+              GROUP BY images3.title";
       $fire = mysqli_query($db,$sql);
       while ($result = mysqli_fetch_assoc($fire)) {
           echo "['" . $result['title'] . "', " . $result['quantity'] . "],";
@@ -106,11 +107,11 @@ while ($row = $result->fetch_assoc()) {
 $dataTable = rtrim($dataTable, ',');
 
 // Close database connection
-$db->close();
+
 ?>
 
 <!-- Draw bar chart using Google Charts -->
-<div id="chart_div" style="width: 400px; height: 500px;"></div>
+<div id="chart_div" class="chart_div" style="width: 400px; height: 500px;"></div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
     google.charts.load('current', {packages: ['corechart']});
@@ -138,8 +139,34 @@ $db->close();
 </script>
 
 <!-- Display the chart in a div -->
+<div id="piechart1" name="piechart1" class="piechart1" style="width: 400px; height: 500px;"></div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart1);
 
-</div>
- 
+  function drawChart1() {
+    var data1 = google.visualization.arrayToDataTable([
+      ['title', 'quantity'],
+      <?php
+      // Assuming you have established a database connection named $db
+      $sql = "SELECT images3.brand, SUM(payment_info.quantity) as quantity             
+              FROM payment_info 
+              JOIN images3 ON payment_info.id_product = images3.id  
+              GROUP BY images3.brand";
+      $fire = mysqli_query($db, $sql);
+      while ($result = mysqli_fetch_assoc($fire)) {
+          echo "['" . $result['brand'] . "', " . $result['quantity'] . "],";
+      }
+      ?>
+    ]);
 
+    var options1 = {
+      title: 'BRAND MOST SOLD',
+    };
+
+    var chart1 = new google.visualization.PieChart(document.getElementById('piechart1'));
+    chart1.draw(data1, options1);
+  } 
+</script>
 </div>

@@ -1,0 +1,17 @@
+{
+    "require": {
+        "stripe/stripe-php": "7.92",
+        "phpoffice/phpspreadsheet": "*",
+        "psr/simple-cache": "*",
+        "psr/http-message": "*",
+        "psr/http-factory": "*",
+        "psr/http-client": "*",
+        "myclabs/php-enum": "*",
+        "markbaker/matrix": "*",
+        "markbaker/complex": "*",
+        "maennchen/zipstream-php": "*",
+        "ezyang/htmlpurifier": "*",
+        "phpmailer/phpmailer": "^6.8"
+    }
+	 
+}

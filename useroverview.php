@@ -1,13 +1,16 @@
 <?php include('templates/header.php');
-     include('templates/footer.php');
+    
     
     ?> 
-   <div class="sidebar">
+ 
+<div class="sidebar">
 		<ul>
-			<li><a href="#">Dashboard</a></li>
+			<li><a href="admin_dashboard.php">Dashboard</a></li>
 			<li><a href="useroverview.php">Users</a></li>
 			<li><a href="productsoverview.php">Products</a></li>
 			<li><a href="#">Orders</a></li>
+            <li><a href="appointments2.php">Appointments</a></li>
+            <li><a href="createcategories.php">Create category</a></li>
 		</ul>
 	</div>
     <div id="content">
