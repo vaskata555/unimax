@@ -6,7 +6,7 @@ $address1 = $_POST['address1'];
 $address2 = $_POST['address2'];
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require 'vendor/autoload.php';
+require_once 'vendor/autoload.php';
 if (isset($_POST['submit1'])) {
     require 'templates/dbConfig.php'; 
    
@@ -57,15 +57,16 @@ if (isset($_POST['submit1'])) {
         $phone_number = $user["phone_number"];
         $username = $user["username"];
         $organization = $user["organization"];
+        $bulstat = $user["bulstat"];
         $first_name = $user["first_name"];
         $last_name = $user["last_name"];
         $payment_type="cash";
-       
-        $sql = "INSERT INTO payment_info (order_number,payment_type,order_date,warranty_date,user_id, email, phone_number, username,organization,first_name,last_name,id_product,code,quantity,price,title,total_price,address1,address2,post_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        include('pdfmaker.php');
+        $sql = "INSERT INTO payment_info (order_number,payment_type,invoice,order_date,warranty_date,user_id, email, phone_number, username,organization,bulstat,first_name,last_name,id_product,code,quantity,price,title,total_price,address1,address2,post_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($db, $sql);
         foreach ($_SESSION["shopping_cart"] as $key => $value) {
             
-            mysqli_stmt_bind_param($stmt, "ssssssssssssssssssss", $order_number,$payment_type,$order_date,$warranty_date,$shopid, $email, $phone_number, $username, $organization, $first_name, $last_name,$id_product, $value["code"],$value["quantity"], $value["price"], $value["title"], $total_price, $address1, $address2, $post_code);
+            mysqli_stmt_bind_param($stmt, "ssssssssssssssssssssss", $order_number,$payment_type,$pdfFilePath,$order_date,$warranty_date,$shopid, $email, $phone_number, $username, $organization,$bulstat, $first_name, $last_name,$id_product, $value["code"],$value["quantity"], $value["price"], $value["title"], $total_price, $address1, $address2, $post_code);
             mysqli_stmt_execute($stmt);
             
         }
@@ -83,8 +84,11 @@ if (isset($_POST['submit1'])) {
        
          $phpmailer->setFrom('sender@example.com', 'Sender Name');
          $phpmailer->addAddress($email, $username); // Use the registered user's email and username
-         $phpmailer->Subject = 'Email/Registration Verification Unimax.com';
-       
+         $phpmailer->Subject = 'Извършена поръчка Unimax.com';
+         $attachmentPath = 'invoices/payment_invoice_' . $order_number . '.pdf';
+
+         // Add the attachment
+         $phpmailer->addAttachment($attachmentPath);
          // Create the email body
          $emailBody = 'Здравейте' . " " . $first_name . " " . $last_name . "," . ' <br>Благодарим ви за направената поръчка!<br>
              <table style="border: 1px solid;">

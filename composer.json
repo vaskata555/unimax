@@ -11,7 +11,8 @@
         "markbaker/complex": "*",
         "maennchen/zipstream-php": "*",
         "ezyang/htmlpurifier": "*",
-        "phpmailer/phpmailer": "^6.8"
+        "phpmailer/phpmailer": "^6.8",
+        "dompdf/dompdf": "^2.0"
     }
 	 
 }

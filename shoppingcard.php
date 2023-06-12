@@ -140,6 +140,10 @@ if (mysqli_num_rows($result) > 0) {
 <input type="text" name="name" class="shopping-name" value="<?php echo $row['first_name'] ?>" required>
 <label class="labelpay">Фамилия</label>
   <input type="text" name="lastname" class="shopping-lastname" value="<?php echo $row['last_name'] ?>"required></input>
+  <label class="labelpay">Фирма</label>
+  <input type="text" name="organization" class="shopping-address1" value="<?php echo $row['organization'] ?>" disabled>
+  <label class="labelpay">Bulstat</label>
+  <input type="text" name="bulstat" class="shopping-address1" value="<?php echo $row['bulstat'] ?>" disabled>
   <label class="labelpay">Адрес за доставка</label>
   <input type="text" name="address1" class="shopping-address1" value="<?php echo $row['address1'] ?>" required>
 <label class="labelpay">Адрес за фактуриране</label>

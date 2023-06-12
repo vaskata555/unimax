@@ -40,7 +40,8 @@ if (!isset($_SESSION['sessionId']) || ($type != "user"&&$type !="admin"&&$type !
   <input type="text" name="email" class="profile_email" value="<?php echo $row['email'] ?>" required></input><br>
   <label class="profilelabel">Име на фирма</label><br>
   <input type="text" name="organization" class="profile_organization" value="<?php echo $row['organization'] ?>" required></input><br>
- 
+  <label class="profilelabel">БУЛСТАТ</label><br>
+  <input type="text" name="bulstat" class="profile_organization" value="<?php echo $row['bulstat'] ?>" disabled></input><br>
   <label class="profilelabel">Адрес за доставка</label><br>
   <input type="text" name="address1" class="profile_address1" value="<?php echo $row['address1'] ?>"></input><br>
   <label class="profilelabel">Адрес за фактуриране</label><br>
@@ -64,6 +65,7 @@ if (!isset($_SESSION['sessionId']) || ($type != "user"&&$type !="admin"&&$type !
       $email = $_POST['email'];
       $username = $_POST['username'];
       $organization = $_POST['organization'];
+      
       $first_name = $_POST['first_name'];
       $last_name = $_POST['last_name'];
       $phone_number = $_POST['phone_number'];
@@ -215,6 +217,7 @@ $image_escaped = str_replace("/","\\",$image_unescaped) ?>
         <div class="label">Price:</div>
         <div class="value"><?php echo $price; ?></div>
       </div>
+      <a href="invoices/payment_invoice_<?php echo $order_number; ?>.pdf" download>Фактура тук</a>
     </div>
   </div>
   <?php } ?>

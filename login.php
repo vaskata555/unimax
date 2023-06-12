@@ -10,6 +10,7 @@ require_once 'templates/header.php';
         <div class="insideformlogin">
     <p> LOGIN HERE! </p>
     
+    
     <form action="templates/login-inc.php" method="post">
         
         <input type="text" name="username" placeholder="Username">

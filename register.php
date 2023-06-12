@@ -5,6 +5,7 @@ require_once 'templates/header.php';
 <div>
 <div class="content">
 <script src='background.js'defer></script>
+<script src='registerhandler.js'defer></script>
 <div class="enterform">
     <div class="centerform">
       
@@ -24,9 +25,16 @@ require_once 'templates/header.php';
 <div class="registration">
 
 
-  <div class="insideregister"
+  <div class="insideregister">
   <form>
   <br>
+  
+      <input type="radio" id="company" name="companyperson" checked>
+      <label for="company">Юридическо лице</label>
+    <br>
+      <input type="radio" id="person" name="companyperson">
+      <label for="person">физическо лице</label>
+      <br>
     <label>Your email:</label><br>
     <input type="email" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" name="email"placeholder="Email" required >
     <p class="error">
@@ -47,13 +55,18 @@ require_once 'templates/header.php';
       <label for="organization">Organization:</label><br>
 			<input type="text" id="organization" name="organization" required><br>
 
+      <label for="bulstat">Bulstat:</label><br>
+			<input type="text" id="bulstat" name="bulstat"required ><br>
+      <p class="error">
+      <span >Оставете празно за физическо лице</span>
+    </p>
       <label for="phone_number">Phone Number:</label><br>
 			<input type="text" id="phone_number" name="phone_number" required><br>
 
     <label>Password</label><br>
     <input type="password" name="password" placeholder="Password">
     <p class="error">
-      <span>At least 8 characters</span>
+      <span>Поне 9 символа</span>
     </p>
 
     <label>Password [repeat]</label><br>

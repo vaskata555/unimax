@@ -11,6 +11,7 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
     $confirmPass = $_POST['confirmPassword'];
     $organization = $_POST['organization'];
+    $bulstat = $_POST['bulstat'];
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $phone_number = $_POST['phone_number'];
@@ -37,7 +38,11 @@ if (isset($_POST['submit'])) {
     }elseif (strlen($username) > 16 || strlen($username) <= 4) {
         header("Location: ../register.php?error=invalidusernametooshort&username=".$username);
         exit();
-    }elseif (strlen( $first_name) > 25 || strlen( $first_name) <= 1) {
+    } elseif (!verifyBulstat($bulstat)) {
+        header("Location: ../register.php?error=invalidbulstat&bulstat=".$bulstat);
+        exit();
+    }
+    elseif (strlen( $first_name) > 25 || strlen( $first_name) <= 1) {
         header("Location: ../register.php?error=invalidnametooshort=".$username);
         exit();
     } elseif (strlen($password) > 20 || strlen($password) <= 8) {
@@ -76,15 +81,17 @@ if (isset($_POST['submit'])) {
                     }
                 } else {
                 $type = "user";
-                $sql = "INSERT INTO users1 (verification_token,email, username, password,type,organization,first_name,last_name,phone_number) VALUES (? ,? ,? ,? ,? ,? ,? ,? ,?)";
+                
+                $sql = "INSERT INTO users1 (verification_token,email, username, password,type,organization,bulstat,first_name,last_name,phone_number) VALUES (? ,? ,? ,? ,? ,? ,? ,? ,?, ?)";
                 $stmt = mysqli_stmt_init($db);
+                
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
                     header("Location: ../register.php?error=sqlerror");
                     exit();
                 } else {
                     $hashedPass = password_hash($password, PASSWORD_DEFAULT);
 
-                    mysqli_stmt_bind_param($stmt, "sssssssss",$verificationToken,$email, $username, $hashedPass,$type,$organization,$first_name,$last_name,$phone_number);
+                    mysqli_stmt_bind_param($stmt, "ssssssssss",$verificationToken,$email, $username, $hashedPass,$type,$organization,$bulstat,$first_name,$last_name,$phone_number);
                     mysqli_stmt_execute($stmt);
                     $phpmailer = new PHPMailer(true);
                     $phpmailer->CharSet = 'UTF-8';
@@ -128,4 +135,33 @@ try {
     }
    
 }
+function verifyBulstat($bulstat) {
+    // Remove any non-digit characters
+    $bulstat = preg_replace('/[^0-9]/', '', $bulstat);
+    if (empty($bulstat)) {
+        return true; // Allow empty input, return true or handle accordingly
+    }
+    // Validate the length
+    if (strlen($bulstat) !== 9) {
+        return false;
+    }
+    
+    // Validate the control digit
+    $controlDigit = intval(substr($bulstat, -1));
+    $multipliers = [21, 19, 17, 13, 11, 9, 7, 3, 1];
+    $sum = 0;
+    
+    for ($i = 0; $i < 9; $i++) {
+        $digit = intval($bulstat[$i]);
+        $sum += $digit * $multipliers[$i];
+    }
+    
+    $remainder = $sum % 10;
+    $validControlDigit = ($remainder === 0 || ($remainder === 9 && $controlDigit === 9));
+    
+    return $validControlDigit;
+}
+
+
+
 ?>

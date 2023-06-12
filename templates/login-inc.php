@@ -29,7 +29,8 @@ if (isset($_POST['submit'])) {
                 $passCheck = password_verify($password, $row['password']);
                $verified = $row['verified'];
                 if ($passCheck == false) {
-                    header("Location: ../index.php?error=wrongpass1");
+                    header("Location: ../login.php?error=wrongpass");
+                    $statusMsg ="Грешна парола";
                     exit();
                 } elseif ($passCheck == true) {
                     if($verified=='1'){
