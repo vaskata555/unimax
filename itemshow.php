@@ -22,16 +22,19 @@
               
          
               <div class="overlay">
-               <!-- <?php echo ($row['file_name']); ?> -->
+             
              
              
                <div class="textproducts"> <?php echo ($row['short_desc']); ?>
               </div></div>
+              </a>
+              <div class="titlepreview"> <?php echo '&nbsp;'.$row['title']; ?> </div>
                </div>
                
         
         
-               </a>
+               
+               
         <?php  $counter++; ?>
             
             

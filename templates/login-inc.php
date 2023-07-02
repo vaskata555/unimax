@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if (isset($_POST['submit'])) {
 
     require 'dbConfig.php'; 
@@ -12,13 +12,14 @@ if (isset($_POST['submit'])) {
    
     
     if (empty($username) || empty($password)) {
-        header("Location: ../index.php?error=emptyfields");
+        header("Location: ../login.php?error=emptyfields");
+        $_SESSION['error'] = "Моля, попълнете всички задължителни полета.";
         exit();
     } else {
-        $sql = "SELECT * FROM users1 WHERE username = ?";
+        $sql = "SELECT * FROM users WHERE username = ?";
         $stmt = mysqli_stmt_init($db);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ../index.php?error=sqlerror");
+            header("Location: ../login.php?error=sqlerror");
             exit();
         } else {
             mysqli_stmt_bind_param($stmt, "s", $username);
@@ -39,24 +40,29 @@ if (isset($_POST['submit'])) {
                  $_SESSION['sessionUser'] = $row['username'];
                  $_SESSION['sessionUsertype'] = $row['type'];
                 
-                    header("Location: ../index.php?success=loggedin");
+                    header("Location: ../login.php?success=loggedin");
+                    $_SESSION['error'] = "Успешно влизане.";
                     exit();
                     }else{ header("Location: ../login.php?error=notverified");
+                        $_SESSION['error'] = "Акаунтът не е потвърден.Моля проверете ващата поща за линк";
                         exit();
                     }
                 } else {
-                    header("Location: ../index.php?error=wrongpass2");
+                    header("Location: ../login.php?error=wrongpass");
+                    $_SESSION['error'] = "Грешно потребителско име или парола";
                     exit();
                 }
             } else {
-                header("Location: ../index.php?error=nouser");
+                header("Location: ../login.php?error=nouser");
+                $_SESSION['error'] = "Грешно потребителско име или парола";
                 exit();
             }
         }
     }   
 
 }else {
-    header("Location: ../index.php?error=accessforbidden");
+    header("Location: ../login.php?error=accessforbidden");
+    $_SESSION['error'] = "Достъпът е забранен";
     exit();
 }
 

@@ -24,14 +24,14 @@ user-scalable=no">
 <div class="topnav" id="myTopnav">
 <a href="index.php" class="logoa"><img src="unimax2.png" class="logo"alt="unimax" ></a>
 
-  <a href="products.php">продукти</a>
+  <a href="products.php">Продукти</a>
   <a href="q&a.php">За нас</a>
   
   <?php
 if (isset($_SESSION['sessionId'])) {
  $type = $_SESSION['sessionUsertype'];
 if($type=='admin'||$type=='user'||$type=='manager'){
-   echo '<a href='.'shoppingcard.php'.'>'.'<i class="fa fa-shopping-cart"aria-hidden="true"></i>'.' Количка'.'</a>';
+   echo '<a href='.'shoppingcart.php'.'>'.'<i class="fa fa-shopping-cart"aria-hidden="true"></i>'.' Количка'.'</a>';
 }
 }
 ?>
@@ -47,20 +47,22 @@ if($type=='admin'||$type=='user'||$type=='manager'){
 if (isset($_SESSION['sessionId'])) {
  $type = $_SESSION['sessionUsertype'];
 if($type=='admin'||$type=='user'||$type=='manager'){
-   echo '<a href='.'appointment.php'.'>'.'book appointment'.'</a>';
+   echo '<a href='.'appointment.php'.'>'.'Запази
+   час'.'</a>';
 }
 }
 ?>
 <div id="dropdown-header" class="dropdown-header">
 <a href="#"class="dropdown-link"><img src="user.png" width="50px" height="50px"></a>
 <div class="dropdown-header-content">
-  <a class="linklg"href="login.php"  >вход в сайта</a>
-  <a class="linklg" href="register.php"  >регистрация</a>
-  
+   <ul>
+ <a class="linklg"href="login.php"  >Вход</a> 
+ <a class="linklg" href="register.php"  >Регистрация</a> 
+</ul>
   </div>
 </div>
-<a id="hiddenbutton" href="login.php" >вход в сайта</a>
-<a id="hiddenbutton" href="register.php"  >регистрация</a>
+<a id="hiddenbutton" href="login.php" >Вход в сайта</a>
+<a id="hiddenbutton" href="register.php"  >Регистрация</a>
 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
   <i class="fa fa-bars"></i>
   </a>

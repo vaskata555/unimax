@@ -5,7 +5,7 @@ require_once 'templates/header.php';
 $verificationToken = $_GET['token'];
 
 // Fetch the user based on the verification token
-$query = "SELECT * FROM users1 WHERE verification_token = ?";
+$query = "SELECT * FROM users WHERE verification_token = ?";
 $stmt = mysqli_prepare($db, $query);
 
 // Bind the parameter
@@ -20,7 +20,7 @@ $result = mysqli_stmt_get_result($stmt);
 if (mysqli_num_rows($result) > 0) {
     $user = mysqli_fetch_assoc($result);
     // Update the verification status to mark the email as verified
-    $updateQuery = "UPDATE users1 SET verified = 1 WHERE id = ?";
+    $updateQuery = "UPDATE users SET verified = 1 WHERE id = ?";
    
     $updateStmt = mysqli_prepare($db, $updateQuery);
 

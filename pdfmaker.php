@@ -8,7 +8,7 @@ $imagePath = 'unimax.png'; // Replace with the actual path to your image file
 $imageData = file_get_contents($imagePath);
 $shopid = $_SESSION['sessionId'];
 
- $sql = "SELECT * FROM users1 WHERE id = ?";
+ $sql = "SELECT * FROM users WHERE id = ?";
  $stmt = mysqli_prepare($db, $sql);
  mysqli_stmt_bind_param($stmt, "i", $shopid);
  mysqli_stmt_execute($stmt);
@@ -146,28 +146,42 @@ $html = '
         </thead>
         <tbody>';
         $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
-// Iterate through each product in the payarray
-$totalPrice = 0;
-
+        // Iterate through each product in the payarray
+        $totalPrice = 0;
+        $ddsprice=0;
 foreach ($_SESSION["payarray"] as $product) {
     $html .= '
             <tr>
                 <td>' . $product["title"] . '</td>
                 <td>' . $product["quantity"] . '</td>
-                <td>BGN' . $product["price"] . '</td>
-                <td>BGN' . ($product["quantity"] * $product["price"]) . '</td>
+                <td>Лева ' . $product["price"] . '</td>
+                <td>Лева ' . ($product["quantity"] * $product["price"]) . '</td>
             </tr>';
 
     $totalPrice += $product["quantity"] * $product["price"];
 }
-
+$totalPrice += $product["quantity"] * $product["price"];
+$ddsprice += $totalPrice*0.2;
+$bezdds = $totalPrice - $ddsprice;
+$totalPrice = number_format($totalPrice, 2);
+$ddsprice = number_format($ddsprice, 2);
+$bezdds = number_format($bezdds, 2);
 $html .= '
             <tr>
-                <td colspan="3" style="text-align: right;">Total:</td>
-                <td>BGN' . $totalPrice . '</td>
+                <td colspan="3" style="text-align: right;">Тотал:</td>
+                <td>Тотал: Лева ' . $totalPrice . '</td>
+                <td>ДДС: Лева ' .  $ddsprice . '</td>
+                <td>Тотал без ДДС: Лева ' .   $bezdds . '</td>
             </tr>
         </tbody>
     </table>
+    <div class="provider-box">
+    <p>Съгласно чл.7,ал.1 от Закона за счетоводството. Чл.114 от ЗДДС и
+    чл. 78 от ИИЗДДС печатът и подписът не са задължителен реквизит</p>
+    <p>В случай,че Булстат не бъде предоставен(което е задължително условие за легитимност на документа) или получателят е физиеско лице,
+    то следва,че бележката е информативна,но не и официален документ.</p>
+    <p>Унимакс не носи отговорност за документи с невярно съдържание</p>
+    </div>
 </body>
 </html>';
 
@@ -301,8 +315,9 @@ file_put_contents($pdfFilePath, $pdfContent);
         </div>
         <div class="provider-box">
             <h3>Издател</h3>
-            <h3>Мол:456612378</h3>
+            <h3>Мол:Стоян Стоянов</h3>
             <p>Унимакс оод</p>
+            <p>БУЛСТАТ: 812171419</p>
             <p>Бургас улица поморие 12</p>
             <p>8000</p>
         </div>
@@ -328,8 +343,8 @@ foreach ($_SESSION["shopping_cart"] as $product) {
             <tr>
                 <td>' . $product["title"] . '</td>
                 <td>' . $product["quantity"] . '</td>
-                <td>BGN' . $product["price"] . '</td>
-                <td>BGN' . ($product["quantity"] * $product["price"]) . '</td>
+                <td>Лева ' . $product["price"] . '</td>
+                <td>Лева ' . ($product["quantity"] * $product["price"]) . '</td>
             </tr>';
 
     $totalPrice += $product["quantity"] * $product["price"];
@@ -342,10 +357,10 @@ $bezdds = number_format($bezdds, 2);
 
 $html .= '
             <tr>
-                <td colspan="3" style="text-align: right;">Total:</td>
-                <td>Total: BGN' . $totalPrice . '</td>
-                <td>DDS: BGN' .  $ddsprice . '</td>
-                <td>Total без DDS: BGN' .   $bezdds . '</td>
+                <td colspan="3" style="text-align: right;">Тотал:</td>
+                <td>Тотал: Лева ' . $totalPrice . '</td>
+                <td>ДДС: Лева ' .  $ddsprice . '</td>
+                <td>Тотал без ДДС: Лева ' .   $bezdds . '</td>
             </tr>
         </tbody>
     </table>

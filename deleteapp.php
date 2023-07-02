@@ -19,7 +19,7 @@ mysqli_stmt_execute($stmt);
   <h5>Успешно Изтрит</h5>
  
   <b class="info-p">Часът за посещение беше изтрит</b>
-  <input type="button" onclick="window.location.href='appointments1.php';" class="submitedituser" value="Go Back">
+  <input type="button" onclick="window.location.href='appointments2.php';" class="submitedituser" value="Go Back">
 </div>
 
 </div>

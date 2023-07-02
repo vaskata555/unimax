@@ -41,18 +41,27 @@ if (isset($_POST['save_excel_data'])) {
             $price = $row['price'];
             $long_desc = $row['long_desc'];
             $title = $row['title'];
-            $brand = $row['brand'];
+            $brand = $row['brand_id'];
             $category_id = $row['category_id'];
             $subcategory_id = $row['subcategory_id'];
 
             // Check if the code exists in the database
-            $checkQuery = "SELECT * FROM images3 WHERE code = '$code'";
+            $checkQuery = "SELECT * FROM products WHERE code = '$code'";
             $checkResult = mysqli_query($db, $checkQuery);
 
             if (mysqli_num_rows($checkResult) > 0) {
-                // If the code exists, update the corresponding row
-                $updateQuery = "UPDATE images3 SET image = '$image', file_name = '$filename', uploaded = '$uploaded', short_desc = '$short_desc', price = '$price', long_desc = '$long_desc', title = '$title', brand = '$brand', category_id = '$category_id', subcategory_id = '$subcategory_id' WHERE code = '$code'";
-                $result = mysqli_query($db, $updateQuery);
+                // Check if the category_id and subcategory_id exist in the category_subcategory table
+                $categorySubcategoryQuery = "SELECT * FROM category_subcategory WHERE category_id = '$category_id' AND subcategory_id = '$subcategory_id'";
+                $categorySubcategoryResult = mysqli_query($db, $categorySubcategoryQuery);
+        
+                if (mysqli_num_rows($categorySubcategoryResult) > 0) {
+                    // If the code exists and category_id and subcategory_id exist, update the corresponding row
+                    $updateQuery = "UPDATE products SET image = '$image', file_name = '$filename', uploaded = '$uploaded', short_desc = '$short_desc', price = '$price', long_desc = '$long_desc', title = '$title', brand_id = '$brand', category_id = '$category_id', subcategory_id = '$subcategory_id' WHERE code = '$code'";
+                    $result = mysqli_query($db, $updateQuery);
+                } else {
+                    // If category_id or subcategory_id doesn't exist, increment the skipped count
+                    $skippedCount++;
+                }
             } else {
                 // If the code doesn't exist, increment the skipped count
                 $skippedCount++;

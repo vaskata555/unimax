@@ -9,6 +9,7 @@ option1.addEventListener('change', function() {
         input1.disabled = false;
         input2.disabled = false;
         input1.value = "";
+        input2.value = "";
         input2.required = true;
     }
 });
@@ -19,5 +20,6 @@ option2.addEventListener('change', function() {
         input2.disabled = true;
         input2.required = false;
         input1.value = "ФИЗИЧЕСКО ЛИЦЕ";
+        input2.value = "";
     }
 });

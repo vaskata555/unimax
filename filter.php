@@ -6,7 +6,7 @@
  if(isset($_POST["txtstartdate"], $_POST["txtenddate"]))  {
   $txtstartdate = date ($_POST['txtstartdate']);
   $txtenddate=date ($_POST['txtenddate']);
-$result = $db->query("SELECT image,file_name,uploaded,short_desc,long_desc FROM images3 WHERE 
+$result = $db->query("SELECT image,file_name,uploaded,short_desc,long_desc FROM products WHERE 
 uploaded BETWEEN '".$txtstartdate."' AND '".$txtenddate."'"); 
  $output = '';
 } 

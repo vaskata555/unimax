@@ -13,27 +13,29 @@ $type = $_SESSION['sessionUsertype'];
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div class="wrapper">
 
-<<div class="sidebar">
+<div class="sidebar">
 		<ul>
-			<li><a href="admin_dashboard.php">Dashboard</a></li>
-			<li><a href="useroverview.php">Users</a></li>
-			<li><a href="productsoverview.php">Products</a></li>
-			<li><a href="orderoverview.php">Orders</a></li>
-            <li><a href="appointments2.php">Appointments</a></li>
-            <li><a href="createcategories.php">Create category</a></li>
+			<li><a href="admin_dashboard.php">Админ Панел</a></li>
+      <li> <a href="upload.php">Качи продукт</a></li>
+			<li><a href="useroverview.php">Потребители</a></li>
+			<li><a href="productsoverview.php">Продукти</a></li>
+			<li><a href="orderoverview.php">Поръчки</a></li>
+            <li><a href="appointments2.php">Заявки</a></li>
+            <li><a href="createcategories.php">Създай категория</a></li>
+           
 		</ul>
 	</div>
 <div class="flexplaceradmin">
     <div class="">
     <form class="timepicker"method="post">
-    <label for="date">Select a date:</label>
+    <label for="date">Избери дата:</label>
     <input type="date" id="date" name="date" value="<?php echo $date; ?>">
-    <button id="submit1"type="submit">Submit</button>
+    <button id="submit1"type="submit">Потвърди</button>
 </form>
     <?php
   // shopping cart is not empty, display the div
   $shopid =$_SESSION['sessionId'];
-  //$sql = "SELECT * FROM users1 WHERE id = $shopid";
+  //$sql = "SELECT * FROM users WHERE id = $shopid";
 
  
 
@@ -43,8 +45,15 @@ $type = $_SESSION['sessionUsertype'];
     $date = date("Y-m-d");
 }
 
-$sql = "SELECT * FROM payment_info where order_date = ?";
+$sql = "SELECT o.*,od.title AS product_title, o.user_id, o.first_name, o.last_name, o.address1, o.phone_number ,od.title
+  FROM orders o
+        JOIN order_details od ON o.order_number = od.order_number
+        WHERE o.order_date = ?";
      $stmt = mysqli_prepare($db, $sql);
+     if (!$stmt) {
+        printf("Error: %s\n", mysqli_error($db));
+        exit();
+    }
      mysqli_stmt_bind_param($stmt, "s",$date);
      mysqli_stmt_execute($stmt);
      $result = mysqli_stmt_get_result($stmt);
@@ -56,11 +65,11 @@ if (!$result) {
 echo "<div class='calendarappointmentpreview'>";
 if (mysqli_num_rows($result) > 0) {
     echo "<table class='admintableappointments'>";
-    echo "<tr><th>ID</th><th>дата</th><th>вид плащане</th><th>technician</th><th>appointment type</th><th>име продукт</th><th>user_id</th><th>first_name</th><th>last_name</th><th>address</th><th>phone_number</th><th>warranty_date</th></tr>";
+    echo "<tr><th>дата</th><th>вид плащане</th><th>№ поръчка</th><th>фирма</th><th>име продукт</th><th>ID</th><th>Име</th><th>Фамилия</th><th>Адрес</th><th>Телефон</th><th>Гаранция</th></tr>";
     while ($row = mysqli_fetch_assoc($result)) {
       
         echo "<tr>";
-        echo "<td>" . $row['id'] . "</td>";
+       
         echo "<td>" . $row['order_date'] . "</td>";
         echo "<td>" . $row['payment_type'] . "</td>";
         echo "<td>" . $row['order_number'] . "</td>";
@@ -78,7 +87,7 @@ if (mysqli_num_rows($result) > 0) {
     }
     echo "</table>";
 } else {
-    echo "No users found.";
+    echo "Не бяха намерени поръчки за тази дата.";
 }
   
 ?>

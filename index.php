@@ -13,15 +13,15 @@
       <div class="loggedpanel">
          <?php
             if (isset($_SESSION['sessionId'])) {
-                echo "Hello: ";
+                echo "Здравейте ";
                 echo $_SESSION['sessionUser'];
                 echo'  ';
-                echo $type = $_SESSION['sessionUsertype'];
+              
                 echo'  ';
                 if ($type == "admin") {
-                    echo '<a href="admin_dashboard.php" class="btnbrand">Admin Dashboard</a>';
-                    echo'  ';
-                    echo '<a href="upload.php" class="btnbrand">upload product</a>';
+                    echo '<a href="admin_dashboard.php" class="btnbrand">Администраторски панел</a> ';
+                    echo'  &nbsp  ';
+                    echo '<a href="upload.php" class="btnbrand">Качи Продукт</a>';
                 }
             } else {
                 echo "";
@@ -38,7 +38,7 @@
             <img id="banner-2" src="camera.gif">
          </div>
          <div class="mySlides fade">
-            <img  id="banner-3"src="system.gif">
+            <img  id="banner-3"src="banner3.png">
          </div>
       </div>
       <div style="text-align:center">
@@ -81,12 +81,12 @@
          <div class="container2">
          
             <?php
-               $result = $db->query("SELECT i.id,i.image,i.file_name, i.title,i.short_desc,i.long_desc, COUNT(*)
-               FROM images3 i
-               JOIN payment_info p ON i.id = p.id_product
+               $result = $db->query("SELECT i.id, i.image, i.file_name, i.title, i.short_desc, i.long_desc, COUNT(*) AS order_count
+               FROM products i
+               JOIN order_details p ON i.id = p.id_product
                GROUP BY i.id
-               ORDER BY COUNT(*) DESC
-               LIMIT 3;");
+               ORDER BY order_count DESC
+               LIMIT 3");
                //mqsto za otdelenie
                ?>
               <div class="top-product">

@@ -8,7 +8,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 function generateExcelFile($db)
 {
     // Fetch data from the SQL tables using JOIN
-    $query = "SELECT category_subcategory.category_id, category.category_name , category_subcategory.subcategory_id, subcategory.subcategory_name
+    $query = "SELECT distinct category_subcategory.category_id, category.category_name , category_subcategory.subcategory_id, subcategory.subcategory_name
               FROM category_subcategory
               JOIN category ON category_subcategory.category_id = category.id 
               JOIN subcategory ON category_subcategory.subcategory_id = subcategory.id

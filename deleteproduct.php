@@ -7,7 +7,7 @@
     die("Connection failed: " . mysqli_connect_error());
 }
 $id = $_GET['id'];
-$sql = "DELETE FROM images3 WHERE id = ?";
+$sql = "DELETE FROM products WHERE id = ?";
 $stmt = mysqli_prepare($db, $sql);
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);

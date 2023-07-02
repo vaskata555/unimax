@@ -1,7 +1,7 @@
 <?php require_once 'dbConfig.php'; ?>
 
 <?php
-$username1 = "SELECT * FROM users1 WHERE username = $username";
+$username1 = "SELECT * FROM users WHERE username = $username";
 if (isset($_SESSION['sessionId'])) {
     echo $_SESSION['username'];
     

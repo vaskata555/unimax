@@ -39,10 +39,10 @@ if (isset($_POST['save_excel_data'])) {
             $price = $row['price'];
             $long_desc = $row['long_desc'];
             $title = $row['title'];
-            $brand = $row['brand'];
+            $brand = $row['brand_id'];
             $category_id = $row['category_id'];
             $subcategory_id = $row['subcategory_id'];
-            $productQuery = "INSERT INTO images3 (code, image, file_name, uploaded, short_desc, price, long_desc, title, brand, category_id, subcategory_id) VALUES ('$code', '$image', '$filename', '$uploaded', '$short_desc', '$price', '$long_desc', '$title','$brand', '$category_id', '$subcategory_id')";
+            $productQuery = "INSERT INTO products (code, image, file_name, uploaded, short_desc, price, long_desc, title, brand_id, category_id, subcategory_id) VALUES ('$code', '$image', '$filename', '$uploaded', '$short_desc', '$price', '$long_desc', '$title','$brand', '$category_id', '$subcategory_id')";
 
             $result = mysqli_query($db, $productQuery);
         }

@@ -1,13 +1,32 @@
 <?php 
  include('templates/header.php');
+ if (isset($_POST["submit"])) {
+	$id = $_POST['id'];
+	$title = $_POST['title'];
 
+	$image = $_POST['image'];
+	$price = $_POST['price'];
+	$long_desc = $_POST['long_desc'];
+	$short_desc = $_POST['short_desc'];
+	$brand = $_POST['brandupload'];
+	$selected_subcategory_id = $_POST['subcategory-chosen'];
+    $selected_category_id = $_POST['category-chosen'];
+   
+	// Update user information in the database
+	$sql = "UPDATE products SET title = ?, image = ?, price = ?, long_desc = ?, short_desc = ?, brand_id = ?, category_id = ?, subcategory_id = ? WHERE id = ?";
+	$stmt = mysqli_prepare($db, $sql);
+	mysqli_stmt_bind_param($stmt, "sssssssss", $title,$image,$price,$long_desc,$short_desc,$brand, $selected_category_id,$selected_subcategory_id ,$id);
+	mysqli_stmt_execute($stmt);
+	$result = mysqli_stmt_get_result($stmt);
+  }
 // Connect to database
  // Check connection
  if (!$db) {
     die("Connection failed: " . mysqli_connect_error());
 }
+
 $id = $_GET['id'];
-$sql = "SELECT * FROM images3 WHERE id = ?";
+$sql = "SELECT * FROM products WHERE id = ?";
 $stmt = mysqli_prepare($db, $sql);
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
@@ -25,6 +44,8 @@ if(mysqli_num_rows($result)>0){
 	foreach($result as $row){
 
 ?>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script src='getcategoryid.js' defer></script>
 <div class="headeredit">
 		<h1>Edit User</h1>
 	</div>
@@ -46,41 +67,93 @@ if(mysqli_num_rows($result)>0){
 			<input type="text" id="short_desc" name="short_desc" value="<?php echo $row['short_desc'];?>" required><br>
 
 			<label for="brand">марка</label><br>
-			<input type="text" id="brand" name="brand" value="<?php echo $row['brand'];?>" required><br>
+			<select name="brandupload" id="brandupload"  required><br>
+    <option value=""disabled selected>Изберете марка</option>
+    <?php $sqlbrand = "SELECT * FROM brands ";
+    $resultbrand = mysqli_query($db,$sqlbrand);
+    while ($rowbr = mysqli_fetch_assoc($resultbrand)) {
+      ?> 
+    <option value='<?php echo $rowbr['id']  ?>'> <?php echo $rowbr['brand'] ?> </option>
+    <?php }?>
+    </select>
+			<?php $sql = "SELECT * FROM category ";
+			$result = mysqli_query($db,$sql);
 
-      <label for="category_id">ID главна категория</label><br>
-			<input type="text" id="category_id" name="category_id" value="<?php echo $row['category_id'];?>" required><br>
+if(mysqli_num_rows($result)>0){
+   
+?> 
+			<p>1.избери категория</p>
+<select name='category-select' id='category-select' style="height: 20px"  >
+<option value=""disabled selected>Изберете категория</option>
+    <?php
+    while ($row = mysqli_fetch_assoc($result)) {
+        ?>
+        <option value='<?php echo $row['id']  ?>'> <?php echo $row['category_name'] ?> </option>
+    
+    <?php
+    } 
+    
+    ?>
+</select>
+
+<?php
+   
+}
+?>
+<script>
+$('#category-select').on('change', function() {
+  var selectedOption = $(this).val();
+
+  
+    $.ajax({
+      url: 'get_subcategories.php',
+      type: 'POST',
+      data: {selected_category_id: selectedOption},
+      charset: 'utf-8',
+      success: function(response) {
+        $('#subcategory-select').html(response);
+      },
+      error: function(xhr, status, error) {
+        console.error(error);
+      }
+    });
+  }
+);
+    </script>
+
+
+<p>2.избери подкатегория</p>
+<select name='category-select' id='subcategory-select' style="height: 20px"  >
+<option value=""disabled selected>Изберете подкатегория</option>
+</select>
+
+<?php
+
+
+  include("get_subcategories.php");
+
+
+
+?>
       
-			<label for="subcategory_id">ID под категория</label><br>
-			<input type="text" id="subcategory_id" name="subcategory_id" value="<?php echo $row['subcategory_id'];?>" required><br>
-
 			
+
 			<br>
-			<input class="submitedituser" id="submit" name="submit" type="submit" value="Apply Changes">
-			<input type="button" onclick="window.location.href='productsoverview.php';" class="submitedituser" value="Go back"/>
-      </form>
+			<br>
+			<input type='hidden' class='createcategorysubmit' id='primary-category' name='category-chosen' placeholder="категория" >
+    
+    <br>
+    
+    <input type='hidden' class='createcategorysubmit' id='sub-category' placeholder="подкатегория" name='subcategory-chosen' value="" >
+			<input class="submitedituser" id="submit" name="submit" type="submit" value="Промени">
+			
+			<input type="button" onclick="window.location.href='productsoverview.php';" class="submitedituser" value="Върни се"/>
+			</form>
 	
+	</div>
 	</div>
 	<?php
  }
 }
-if (isset($_POST["submit"])) {
-	$id = $_POST['id'];
-	$title = $_POST['title'];
 
-	$image = $_POST['image'];
-	$price = $_POST['price'];
-	$long_desc = $_POST['long_desc'];
-	$short_desc = $_POST['short_desc'];
-	$brand = $_POST['brand'];
-	$category_id = $_POST['category_id'];
-	$subcategory_id = $_POST['subcategory_id'];
-   
-	// Update user information in the database
-	$sql = "UPDATE images3 SET title = ?, image = ?, price = ?, long_desc = ?, short_desc = ?, brand = ?, category_id = ?, subcategory_id = ? WHERE id = ?";
-	$stmt = mysqli_prepare($db, $sql);
-	mysqli_stmt_bind_param($stmt, "sssssssss", $title,$image,$price,$long_desc,$short_desc,$brand,$category_id,$subcategory_id,$id);
-	mysqli_stmt_execute($stmt);
-	$result = mysqli_stmt_get_result($stmt);
-  }
 	?>

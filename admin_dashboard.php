@@ -18,32 +18,29 @@ $type = $_SESSION['sessionUsertype'];
 
 <div class="sidebar">
 		<ul>
-			<li><a href="admin_dashboard.php">Dashboard</a></li>
-			<li><a href="useroverview.php">Users</a></li>
-			<li><a href="productsoverview.php">Products</a></li>
-			<li><a href="orderoverview.php">Orders</a></li>
-            <li><a href="appointments2.php">Appointments</a></li>
-            <li><a href="createcategories.php">Create category</a></li>
+			<li><a href="admin_dashboard.php">Админ Панел</a></li>
+      <li> <a href="upload.php">Качи продукт</a></li>
+			<li><a href="useroverview.php">Потребители</a></li>
+			<li><a href="productsoverview.php">Продукти</a></li>
+			<li><a href="orderoverview.php">Поръчки</a></li>
+            <li><a href="appointments2.php">Заявки</a></li>
+            <li><a href="createcategories.php">Създай категория</a></li>
+            <li><a href="createbrand.php">Създай марка</a></li>
+           
 		</ul>
 	</div>
+  <div class="wrapwhite">
     <div id="content">
         <div class="flexplacer">
         <div class="adminentrymessage">
     <?php
     if (isset($_SESSION['sessionId'])) {
-        echo"WELCOME ";
+        echo"Здравейте ";
         echo $type = $_SESSION['sessionUsertype'];
         echo"  ";
         echo $_SESSION['sessionUser'];
         echo"  ";
       
-        if($type=="admin"){
-        echo '<a href="admin_dashboard.php" class="btnbrand">Admin Dashboard</a>';
-        echo'  ';
-        echo '<a href="upload.php" class="btnbrand">upload product</a>';
-        }
-    } else {
-        echo "Home";
     }
     ?>
   </div>
@@ -63,10 +60,10 @@ $type = $_SESSION['sessionUsertype'];
     var data = google.visualization.arrayToDataTable([
       ['title', 'quantity'],
       <?php
-      $sql = "SELECT images3.title, SUM(payment_info.quantity) as quantity             
-              FROM payment_info 
-              JOIN images3 ON payment_info.id_product = images3.id  
-              GROUP BY images3.title";
+      $sql = "SELECT products.title, SUM(order_details.quantity) as quantity             
+              FROM order_details 
+              JOIN products ON order_details.id_product = products.id  
+              GROUP BY products.title";
       $fire = mysqli_query($db,$sql);
       while ($result = mysqli_fetch_assoc($fire)) {
           echo "['" . $result['title'] . "', " . $result['quantity'] . "],";
@@ -74,7 +71,7 @@ $type = $_SESSION['sessionUsertype'];
       ?>
     ]);
     var options = {
-      title: 'Sold product',
+      title: 'най-продавани продукти',
     };
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
     chart.draw(data, options);
@@ -90,10 +87,11 @@ $type = $_SESSION['sessionUsertype'];
 $current_year = date("Y");
 
 // Generate data for bar chart
-$sql = "SELECT DATE_FORMAT(order_date, '%Y-%m') AS month_year, SUM(price * quantity) AS total_income
-        FROM payment_info
-        WHERE DATE_FORMAT(order_date, '%Y') = '" . date('Y') . "'
-        GROUP BY DATE_FORMAT(order_date, '%Y-%m')
+$sql = "SELECT DATE_FORMAT(o.order_date, '%Y-%m') AS month_year, SUM(od.price * od.quantity) AS total_income
+        FROM orders o
+        JOIN order_details od ON o.order_number = od.order_number
+        WHERE DATE_FORMAT(o.order_date, '%Y') = YEAR(CURDATE())
+        GROUP BY DATE_FORMAT(o.order_date, '%Y-%m')
         ORDER BY month_year";
 $result = $db->query($sql);
 
@@ -121,14 +119,14 @@ $dataTable = rtrim($dataTable, ',');
         var data = google.visualization.arrayToDataTable([<?php echo $dataTable; ?>]);
 
         var options = {
-            title: 'Total Income per Month in 2023',
+            title: 'Приходи за месец',
             hAxis: {
-                title: 'Month',
+                title: 'месец',
             },
             vAxis: {
-                title: 'Total Income',
+                title: 'тотал приходи',
                 minValue: 0,
-                format: '$#,###'
+                format: 'лв#,###'
             },
             legend: {position: 'none'}
         };
@@ -150,10 +148,11 @@ $dataTable = rtrim($dataTable, ',');
       ['title', 'quantity'],
       <?php
       // Assuming you have established a database connection named $db
-      $sql = "SELECT images3.brand, SUM(payment_info.quantity) as quantity             
-              FROM payment_info 
-              JOIN images3 ON payment_info.id_product = images3.id  
-              GROUP BY images3.brand";
+      $sql = "SELECT b.brand, SUM(od.quantity) AS quantity
+      FROM order_details AS od
+      JOIN products AS p ON od.code = p.code
+      JOIN brands AS b ON p.brand_id = b.id
+      GROUP BY b.brand;";
       $fire = mysqli_query($db, $sql);
       while ($result = mysqli_fetch_assoc($fire)) {
           echo "['" . $result['brand'] . "', " . $result['quantity'] . "],";
@@ -162,11 +161,12 @@ $dataTable = rtrim($dataTable, ',');
     ]);
 
     var options1 = {
-      title: 'BRAND MOST SOLD',
+      title: 'Най-продавани марки',
     };
 
     var chart1 = new google.visualization.PieChart(document.getElementById('piechart1'));
     chart1.draw(data1, options1);
   } 
 </script>
+</div>
 </div>

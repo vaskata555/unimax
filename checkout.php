@@ -13,7 +13,7 @@ foreach ($_SESSION["shopping_cart"] as $product){
            "currency" =>"BGN",
            "product_data" =>[
                "name"=> $product["title"],
-               "description" => "Latest mobile 2021"
+               "description" => $product["desc"]
            ],
            "unit_amount" => $product["price"] * 100 // Multiply by 100 to convert to cents
         ],
@@ -40,6 +40,7 @@ if(isset($_SESSION['payarray'])) {
     $code = $product["code"];
     $price = $product["price"];
     $title = $product["title"]; 
+    $desc = $product["desc"];
     $id_product = $product["id"];
     $quantity = $product["quantity"];
     
@@ -56,6 +57,7 @@ if(isset($_SESSION['payarray'])) {
         $new_record = array(
             'id' => $id_product,
             'title' => $title,
+            'desc' => $desc,
             'code' => $code,
             'price' => $price,
             'quantity' => $quantity

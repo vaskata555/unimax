@@ -15,11 +15,11 @@ $spreadsheet = new Spreadsheet();
     $sheet->setCellValue('F1', 'price');
     $sheet->setCellValue('G1', 'long_desc');
     $sheet->setCellValue('H1', 'title');
-    $sheet->setCellValue('I1', 'brand');
+    $sheet->setCellValue('I1', 'brand_id');
     $sheet->setCellValue('J1', 'category_id');
     $sheet->setCellValue('K1', 'subcategory_id');
     // Populate the spreadsheet with data
-   
+    $sheet->setCellValue('B' . 2, "img/");
 
     // Save the spreadsheet to a file
     $writer = new Xlsx($spreadsheet);

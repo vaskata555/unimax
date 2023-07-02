@@ -23,35 +23,26 @@ $type = $_SESSION['sessionUsertype'];
     }
     
 ?>
-<?php 
-// Check if a message is stored in the session
-
-?> 
- <?php
-    if (isset($_SESSION['sessionId'])) {
-
-
-        echo "Hello user: ";
-        echo $_SESSION['sessionUser'];
-        echo $type = $_SESSION['sessionUsertype'];
-        if($type=="admin"){
-        echo '<a href="admin_dashboard.php" class="btnbrand">Admin Dashboard</a>';
-        echo'  ';
-        echo '<a href="upload.php" class="btnbrand">upload product</a>';
-        }
-    } else {
-        echo "Home";
-    }
-   
-   
-?>
+ 
+<div class="sidebar">
+		<ul>
+			<li><a href="admin_dashboard.php">Админ Панел</a></li>
+      <li> <a href="upload.php">Качи продукт</a></li>
+			<li><a href="useroverview.php">Потребители</a></li>
+			<li><a href="productsoverview.php">Продукти</a></li>
+			<li><a href="orderoverview.php">Поръчки</a></li>
+            <li><a href="appointments2.php">Заявки</a></li>
+            <li><a href="createcategories.php">Създай категория</a></li>
+           
+		</ul>
+	</div>
 <?php 
 // Include the database configuration file  
-require_once 'templates/dbConfig.php'; 
+
 
 
 // If file upload form is submitted 
-$status = $statusMsg = ''; 
+
 if(isset($_POST["submit"])){ 
     $status = 'error'; 
    
@@ -67,7 +58,7 @@ if(isset($_POST["submit"])){
   
    $selected_subcategory_id = $_POST['subcategory-chosen'];
     $selected_category_id = $_POST['category-chosen'];
-    $sqlcheck = "SELECT code FROM images3 WHERE code = ? ";
+    $sqlcheck = "SELECT code FROM products WHERE code = ? ";
     $stmt1 = mysqli_stmt_init($db);
     if(!empty($_FILES["imageupload"]["name"] )) { 
         if (!mysqli_stmt_prepare($stmt1, $sqlcheck)) {
@@ -100,7 +91,7 @@ if(isset($_POST["submit"])){
             $imgContent = "img" .'/'. $fileName ;
            
             // Insert image content into database 
-            $insert = $db->query("INSERT into images3 (code,image,file_name,uploaded,short_desc,price,long_desc,title,brand,category_id,subcategory_id) VALUES ('$code','$imgContent','$fileName',now(),'$short','$price','$long','$title','$brand','$selected_category_id','$selected_subcategory_id')");
+            $insert = $db->query("INSERT into products (code,image,file_name,uploaded,short_desc,price,long_desc,title,brand_id,category_id,subcategory_id) VALUES ('$code','$imgContent','$fileName',now(),'$short','$price','$long','$title','$brand','$selected_category_id','$selected_subcategory_id')");
          }
             if($insert){ 
                 $status = 'success'; 
@@ -113,26 +104,40 @@ if(isset($_POST["submit"])){
             $statusMsg = 'Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.'; 
         } 
     }else{ 
-        $statusMsg = 'Please select an image file to upload.'; 
+        $statusMsg = 'Моля попълнете всички полета'; 
     } 
 
  
 
 // Display status message 
-echo $statusMsg; 
+
 ?>
 
 
 <!DOCTYPE html>
 <html>
 <body>
-    
+    <div class="wrapwhite">
 <div class="contentupload">
+<br>
+    <br>
+    <?php echo $statusMsg; ?>
+    <br>
+    <br>
 <form action="upload.php" class="contentuploadform" method="post" enctype="multipart/form-data">
-    <label>Select Image File:</label>
+    <label>Избери изображение</label>
+    <br>
     <input type="file" id="imageupload" name="imageupload" required><br>
-    <input type="text" id="titleupload" name="titleupload" placeholder="title"required><br>
-    <input type="text" id="brandupload" name="brandupload" placeholder="brand"required><br>
+    <input type="text" id="titleupload" name="titleupload" placeholder="заглавие"required><br>
+    <select name="brandupload" id="brandupload"  required><br>
+    <option value=""disabled selected>Изберете марка</option>
+    <?php $sqlbrand = "SELECT * FROM brands ";
+    $resultbrand = mysqli_query($db,$sqlbrand);
+    while ($rowbr = mysqli_fetch_assoc($resultbrand)) {
+      ?> 
+    <option value='<?php echo $rowbr['id']  ?>'> <?php echo $rowbr['brand'] ?> </option>
+    <?php }?>
+    </select>
     <div class="productcategoryupload">
     <div class="uploadmaincategory">
     <?php $sql = "SELECT * FROM category ";
@@ -184,7 +189,7 @@ $('#category-select').on('change', function() {
 <div class="uploadmainsubcategory"> 
 <p>2.избери подкатегория</p>
 <select name='category-select' id='subcategory-select' style="height: 100%"  >
-<option value=""disabled selected>Изберете категория</option>
+<option value=""disabled selected>Изберете подкатегория</option>
 </select>
 <?php
 
@@ -204,26 +209,29 @@ $('#category-select').on('change', function() {
 </div>
 
 
-<input type="text"  name="code" id="code" placeholder="code"required><br>
-    <input type="text" name="subject" id="subject" placeholder="short-description"required><br>
-    <textarea class="textareaupload" name="subject1" id="subject1" wrap="hard" rows="10" cols="85"required></textarea><br>
-  <input type="text" id="priceupload" name="priceupload" placeholder="price"required><br>
-    <input type="submit" name="submit" id="submit" value="Upload">
-    <input type='text' class='createcategorysubmit' id='primary-category' name='category-chosen' value=''>
+<input type="text"  name="code" id="code" placeholder="код"required><br>
+    <input type="text" name="subject" id="subject" placeholder="кратко описание"required><br>
+    <textarea class="textareaupload" name="subject1" id="subject1" wrap="hard" rows="10" placeholder="Описание" cols="85"required></textarea><br>
+  <input type="text" id="priceupload" name="priceupload" placeholder="цена"required><br>
+    
+    <input type='text' class='createcategorysubmit' id='primary-category' name='category-chosen' placeholder="категория" value='' readonly>
     
     <br>
     
-    <input type='text' class='createcategorysubmit' id='sub-category' name='subcategory-chosen' value=''>
-    
-    
+    <input type='text' class='createcategorysubmit' id='sub-category' placeholder="подкатегория" name='subcategory-chosen' value=''readonly>
+     
+    <br>
+    <input type="submit" name="submit" id="submit" value="Качи"></input>
+    <br><br>
 </form>
 </div>
+<div class="contentupload">
  <div class="excel_import">
 <h1>Групово качване</h1>
 <form action="/unimax/uploadexcel.php" id="myForm" class="contentuploadform" method="post" enctype="multipart/form-data">
-    <label>Select Image File:</label>
+    <label>Изберете файл:</label>
     <input type="file" id="imageupload" name="import_file" required><br>
-    <button type="submit" name="save_excel_data" >Import</button>
+    <button type="submit" name="save_excel_data" >Качи</button>
     <br>
     <p>
     <label class="switch1">
@@ -244,6 +252,7 @@ $('#category-select').on('change', function() {
       }
     }
   </script>
+
 <h1>Таксономия за категории</h1>
 <?php include('taxonomy.php');?>
 <form method="POST" action="">
@@ -262,6 +271,18 @@ $('#category-select').on('change', function() {
        
         <a href="defaultupload.xlsx" download>Изтегли файл</a>
     </form>
+    <br>
+    <h1>Таксономия за Марки</h1>
+<?php include('brandtaxonomy.php');?>
+<form method="POST" action="">
+        <button type="submit" name="generate_excel_brand">Генерирай Актуална Tаксономия</button>
+       
+           
+       
+        <a href="outputbrands.xlsx" download>Изтегли таксономия</a>
+    </form>
+</div>
+</div>
 </div>
 </body>
 <?php  include('templates/footer.php'); ?>

@@ -2,7 +2,9 @@
 // filter_data.php
 include('templates/dbConfig.php');
 if (isset($_POST["action"])) {
-    $query = "SELECT DISTINCT * FROM images3";
+    $query = "SELECT DISTINCT p.* FROM products AS p
+    JOIN brands AS b ON p.brand_id = b.id
+    ";
 }
 // Retrieve the filter parameters from the AJAX request
 
@@ -37,7 +39,7 @@ if (!empty($selectedCategories)) {
     $categoryParams = array_fill(0, count($selectedCategories), '?');
     $categoryParams = implode(',', $categoryParams);
     $whereClause .= ($whereClause === "") ? " WHERE" : " AND";
-    $whereClause .= " category_id IN ($categoryParams)";
+    $whereClause .= " p.category_id IN ($categoryParams)";
     $bindTypes .= str_repeat('s', count($selectedCategories));
     $bindParams = array_merge($bindParams, $selectedCategories);
 }
@@ -45,7 +47,7 @@ if (!empty($brands)) {
     $brandParams = array_fill(0, count($brands), '?');
     $brandParams = implode(',',  $brandParams);
     $whereClause .= ($whereClause === "") ? " WHERE" : " AND";
-    $whereClause .= " brand IN ($brandParams)";
+    $whereClause .= " b.id IN ($brandParams)";
     $bindTypes .= str_repeat('s', count($brands));
     $bindParams = array_merge($bindParams, $brands);
 }
@@ -74,15 +76,17 @@ if ($stmt) {
 
         $html .= '<div class="itemproducts">';
         $html .= '  <a href="product.php?id=' . $row['id'] . '" class="product-link">';
-        $html .= '    <img class="imagebd" src="' . $image_escaped . '" />';
+        $html .= '    <img class="imagebdproducts" src="' . $image_escaped . '" />';
         $html .= '    <div class="overlay">';
         $html .= '      <div class="textproducts">' . $row['short_desc'] . '</div>';
         $html .= '    </div>';
         $html .= '  </a>';
+        $html .= '      <div class="titlepreview">' .'&nbsp;'.$row['title']. '</div>';
+        $html .= '    </div>';
         $html .= '</div>';
         
     }
-
+   
     // If no products found, display a message
     if (empty($html)) {
         $html = '<p>No products found.</p>';

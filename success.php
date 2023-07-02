@@ -67,7 +67,7 @@ require_once 'vendor/autoload.php';
 
  $shopid = $_SESSION['sessionId'];
 
- $sql = "SELECT * FROM users1 WHERE id = ?";
+ $sql = "SELECT * FROM users WHERE id = ?";
  $stmt = mysqli_prepare($db, $sql);
  mysqli_stmt_bind_param($stmt, "i", $shopid);
  mysqli_stmt_execute($stmt);
@@ -90,7 +90,17 @@ require_once 'vendor/autoload.php';
  $post_code = $user["post_code"];
  $total_price = 0;
  $payment_type="card";
- $sql = "INSERT INTO payment_info (order_number, payment_type, invoice, order_date, warranty_date, user_id, email, phone_number, username, organization, first_name, last_name, id_product, code, quantity, price, title, total_price, address1, address2, post_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+ foreach($_SESSION["payarray"] as $product){ 
+  $total_price += ($product["price"]*$product["quantity"]);
+ }
+ $sql1 = "INSERT INTO orders (order_number, payment_type, invoice, order_date, warranty_date, user_id, email, phone_number, username, organization, bulstat, first_name, last_name, total_price, address1, address2, post_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+ $stmt1 = mysqli_prepare($db, $sql1);
+ mysqli_stmt_bind_param($stmt1, "sssssssssssssssss", $order_number, $payment_type, $pdfFilePath, $order_date, $warranty_date, $shopid, $email, $phone_number, $username, $organization, $bulstat, $first_name, $last_name, $total_price, $address1, $address2, $post_code);
+ mysqli_stmt_execute($stmt1);
+ mysqli_stmt_close($stmt1);
+ $sql = "INSERT INTO order_details (order_number, id_product, title, code, quantity, price) VALUES (?, ?, ?, ?, ?, ?)";
+ $stmt = mysqli_prepare($db, $sql);
+ print_r($_SESSION["payarray"]);
  foreach($_SESSION["payarray"] as $product){  
 
   $id_product = $product["id"];
@@ -101,12 +111,14 @@ require_once 'vendor/autoload.php';
   $total_price += ($product["price"]*$product["quantity"]);
 
 
-$stmt = mysqli_prepare($db, $sql);
-mysqli_stmt_bind_param($stmt, "sssssssssssssssssssss", $order_number, $payment_type, $pdfFilePath, $order_date, $warranty_date, $shopid, $email, $phone_number, $username, $organization, $first_name, $last_name, $id_product, $product["code"], $product["quantity"], $product["price"], $product["title"], $total_price, $address1, $address2, $post_code);
+
+mysqli_stmt_bind_param($stmt, "ssssss", $order_number, $id_product ,  $title, $code, $quantity, $price);
      mysqli_stmt_execute($stmt);
-     
+     mysqli_error($db);
  }
+
  mysqli_stmt_close($stmt);
+ 
  $phpmailer = new PHPMailer(true);
  $phpmailer->CharSet = 'UTF-8';
 
@@ -149,11 +161,12 @@ mysqli_stmt_bind_param($stmt, "sssssssssssssssssssss", $order_number, $payment_t
 
   $emailBody .= '
       </table>
-      номер поръчка: ' . "$order_number" . '
+      Фактурата с информация за поръчката е прикачена към имейла <br>
+      номер поръчка: ' . "$order_number" . '<br>
       Благодарим ви!<br><br>
       екип на Унимакс ООД<br>
-      телефон: <br>
-      email: ';
+      телефон:0876377999 <br>
+      email:team@unimaxeood.com ';
 
   $phpmailer->Body = $emailBody;
   $phpmailer->isHTML(true);
@@ -161,7 +174,7 @@ mysqli_stmt_bind_param($stmt, "sssssssssssssssssssss", $order_number, $payment_t
   // Send the email
   $phpmailer->send();
 
-  echo 'Verification email sent successfully!';
+
 } catch (Exception $e) {
   echo 'Verification email could not be sent. Error: ', $phpmailer->ErrorInfo;
 }

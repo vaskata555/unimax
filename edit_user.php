@@ -7,7 +7,7 @@
     die("Connection failed: " . mysqli_connect_error());
 }
 $id = $_GET['id'];
-$sql = "SELECT * FROM users1 WHERE id = ?";
+$sql = "SELECT * FROM users WHERE id = ?";
 $stmt = mysqli_prepare($db, $sql);
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
@@ -25,9 +25,11 @@ if(mysqli_num_rows($result)>0){
 	foreach($result as $row){
 
 ?>
+
 <div class="headeredit">
 		<h1>Edit User</h1>
 	</div>
+	<div class="wrapwhite">
 <div class="formedit">
 <form method="POST">
 
@@ -54,14 +56,14 @@ if(mysqli_num_rows($result)>0){
 			<select class="selectedituser" id="type" name="type" required>
 				<option value="">Select a user type</option>
 				<option value="admin">Admin</option>
-				<option value="moderator">Moderator</option>
+			
 				<option value="user">User</option>
 			</select><br>
 			<br>
 			<input class="submitedituser" id="submit" name="submit" type="submit" value="Apply Changes">
 			<input type="button" onclick="window.location.href='admin_dashboard.php';" class="submitedituser" value="Go to Dashboard"/>
       </form>
-	
+	 
 	</div>
 	<?php
  }
@@ -76,7 +78,7 @@ if (isset($_POST["submit"])) {
 	$phone_number = $_POST['phone_number'];
    
 	// Update user information in the database
-	$sql = "UPDATE users1 SET username = ?, email = ?, organization = ?, first_name = ?, last_name = ?, phone_number = ? WHERE id = ?";
+	$sql = "UPDATE users SET username = ?, email = ?, organization = ?, first_name = ?, last_name = ?, phone_number = ? WHERE id = ?";
 	$stmt = mysqli_prepare($db, $sql);
 	mysqli_stmt_bind_param($stmt, "sssssss", $username,$email,$organization,$first_name,$last_name,$phone_number,$id);
 	mysqli_stmt_execute($stmt);

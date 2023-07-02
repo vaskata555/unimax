@@ -109,7 +109,7 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
 
 	//Check Unique Transcation ID
 	$db = new DB;
-	$db->query("SELECT * FROM `payment_info` WHERE txn_id=:txn_id");
+	$db->query("SELECT * FROM `orders` WHERE txn_id=:txn_id");
 	$db->bind(':txn_id', $txn_id);
 	$db->execute();
 	$unique_txn_id = $db->rowCount();
@@ -120,7 +120,7 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
 		$db->close();
 		exit();
 	}else{
-		$db->query("INSERT INTO `payment_info`
+		$db->query("INSERT INTO `orders`
 			(`item_number`, `item_name`, `payment_status`,
 				 `amount`, `currency`, `txn_id`)
 			VALUES

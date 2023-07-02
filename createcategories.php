@@ -1,6 +1,12 @@
 <?php include('templates/header.php');
     
     mysqli_set_charset($db, "utf8");
+    if (isset($_SESSION['message'])) {
+        $message = $_SESSION['message'];
+        unset($_SESSION['message']); // Remove the error from the session after retrieving it
+      } else {
+        $message = ""; // Set a default value if no error is present
+      }
     ?>
     <script src="getcategoryid.js"defer></script>
 <?php
@@ -10,24 +16,20 @@ if (!isset($_SESSION['sessionId']) || $type != "admin" ) {
         exit();
     }
 ?>
-<?php
-    if (isset($_SESSION['sessionId'])) {
 
-
-        echo "Hello user: ";
-        echo $_SESSION['sessionUser'];
-        echo $type = $_SESSION['sessionUsertype'];
-        if($type=="admin"){
-        echo '<a href="admin_dashboard.php" class="btnbrand">Admin Dashboard</a>';
-        echo'  ';
-        echo '<a href="upload.php" class="btnbrand">upload product</a>';
-        }
-    } else {
-        echo "Home";
-    }
-
-
-?>
+<div class="sidebar">
+		<ul>
+			<li><a href="admin_dashboard.php">Админ Панел</a></li>
+      <li> <a href="upload.php">Качи продукт</a></li>
+			<li><a href="useroverview.php">Потребители</a></li>
+			<li><a href="productsoverview.php">Продукти</a></li>
+			<li><a href="orderoverview.php">Поръчки</a></li>
+            <li><a href="appointments2.php">Заявки</a></li>
+            <li><a href="createcategories.php">Създай категория</a></li>
+           
+		</ul>
+	</div>
+    <div class="wrapwhite">
 <?php 
 // Include the database configuration file  
 
@@ -136,7 +138,7 @@ echo $statusMsg1;
 <div class="contentupload">
     
 <form action="" method="post">
-    <label>add cateogory/subcategory</label>
+    <label>Добави категория/подкатегория</label>
 
     <br>
     <input type="text" name="category" placeholder="category">
@@ -144,12 +146,16 @@ echo $statusMsg1;
     <input type="text" name="subcategory" placeholder="subcategory">
     <input type="checkbox" id="subcategorycheck" name="subcategorycheck"><br>
     <br>
-    <input type="submit" name="submit" value="Upload">
+    <input type="submit" name="submit" value="Добави">
 </form>
 
 </div>
 <div class="categoryupload">
+<br>
+  <p><?php echo '  ' . $message; ?></p>
+  <br>
     <div class="uploadmaincategory">
+  
 <?php $sql = "SELECT * FROM category ";
 
 $result = mysqli_query($db,$sql);
@@ -200,11 +206,11 @@ if(mysqli_num_rows($result1)>0){
 <div class="uploadcategorymap">
     <form  method="POST">
     <br>
-    <input type='text' class='createcategorysubmit' name='category-chosen' value=''>
-    <input type='text' class='categoryid' name='categoryid' value=''>
+    <input type='text' class='createcategorysubmit' name='category-chosen' value='' readonly>
+    <input type='text' class='categoryid' name='categoryid' value='' readonly>
     <br>
-    <input type='text' class='createcategorysubmit' name='subcategory-chosen' value=''>
-    <input type='text' class='categoryid' name='subcategoryid' value=''>
+    <input type='text' class='createcategorysubmit' name='subcategory-chosen' value='' readonly>
+    <input type='text' class='categoryid' name='subcategoryid' value='' readonly>
     <br>
     <input name='submitcategorycombo' type="submit">
 </form>
@@ -225,14 +231,16 @@ if(isset($_POST["submitcategorycombo"])){
     mysqli_stmt_bind_param($sql, "ii",$category_id,$subcategory_id); 
 
 if(mysqli_stmt_execute($sql)){ 
-    echo"категория: ".$category_name. " и субкатегория:".$subcategory_name." бяха разрешени" ;
+    
+    $_SESSION['message'] = "категория: ".$category_name. " и субкатегория:".$subcategory_name." бяха разрешени";
 }else{ 
-    echo "грешка категориите не бяха добавени";
+    $_SESSION['message'] = "Грешка категориите не бяха добавени";
 } 
 mysqli_stmt_close($sql);
   
 }  
-include('templates/footer.php');
+
     ?>
+    </div>
 </body>
 </html>

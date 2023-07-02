@@ -5,18 +5,20 @@
     
     <div class="sidebar">
 		<ul>
-			<li><a href="admin_dashboard.php">Dashboard</a></li>
-			<li><a href="useroverview.php">Users</a></li>
-			<li><a href="productsoverview.php">Products</a></li>
-			<li><a href="orderoverview.php">Orders</a></li>
-            <li><a href="appointments2.php">Appointments</a></li>
-            <li><a href="createcategories.php">Create category</a></li>
+			<li><a href="admin_dashboard.php">Админ Панел</a></li>
+      <li> <a href="upload.php">Качи продукт</a></li>
+			<li><a href="useroverview.php">Потребители</a></li>
+			<li><a href="productsoverview.php">Продукти</a></li>
+			<li><a href="orderoverview.php">Поръчки</a></li>
+            <li><a href="appointments2.php">Заявки</a></li>
+            <li><a href="createcategories.php">Създай категория</a></li>
+           
 		</ul>
 	</div>
     <div id="content">
     <div class="firstadminpanel">
     <?php  
-    $result = $db->query("SELECT * FROM images3 ");
+    $result = $db->query("SELECT * FROM products ");
    
     while($row = $result->fetch_assoc() ){ 
       ?>
@@ -48,7 +50,7 @@
 <br>
 <?php echo "<form method='post' action=''>";
 
-//echo "<td><a href='shoppingcard.php?code=".$row['code']."'class='buynowbutton''". "'>Купи сега</a> ";
+//echo "<td><a href='shoppingcart.php?code=".$row['code']."'class='buynowbutton''". "'>Купи сега</a> ";
 echo"<a href='edit_product.php?id=".$row['id']. "'class='buynowbutton'>Коригирай</a>";
 echo"<br>";
 echo"<a href='deleteproduct.php?id=" . $row['id'] ."'class='buynowbutton'>Премахни</a>";

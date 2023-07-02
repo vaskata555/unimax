@@ -7,7 +7,7 @@
     die("Connection failed: " . mysqli_connect_error());
 }
 $id = $_GET['id'];
-$sql = "DELETE FROM users1 WHERE id = ?";
+$sql = "DELETE FROM users WHERE id = ?";
 $stmt = mysqli_prepare($db, $sql);
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);

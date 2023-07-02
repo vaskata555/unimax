@@ -6,7 +6,7 @@
   
 
   
-  $sql = "UPDATE images3 SET viewcount = viewcount + ' $viewcount' WHERE id = '$id'";
+  $sql = "UPDATE products SET viewcount = viewcount + ' $viewcount' WHERE id = '$id'";
   $result = mysqli_query($db, $sql);
   
   if ($result) {

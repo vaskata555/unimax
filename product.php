@@ -20,17 +20,18 @@
     ?>
      <?php
     if (isset($_SESSION['sessionId'])) {
-        echo "You are logged in!";
+        echo "Вие сте във профилът си!";
     } else {
         echo "Home";
     }
 
 ?>
-
+<div class="wrapwhite">
+          
 
 
          <?php  $id = $_GET['id'];
-    $sql = "SELECT * FROM images3 WHERE id = ?";
+    $sql = "SELECT * FROM products WHERE id = ?";
     $stmt = mysqli_prepare($db, $sql);
     mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
@@ -42,7 +43,6 @@
      <div class="galleryprodutscreen"> 
          
          
-          
      <h1><?php echo ($row['title']); ?></h1>  
      <br>   
      <div class="wholeproductpage">
@@ -52,9 +52,15 @@
     <img class="imagebd"  src="<?php echo  $image_escaped ;?>"/>
          
      </div>
-       <div class="producttextcontainer">  <?php echo("<span class=producttextspan >".$row['long_desc']."</span>"); ?></div>
+       <div class="producttextcontainer">  <?php echo("<span class=producttextspan >".$row['long_desc']."</span>"); ?>
+       <br>
+       <br>
+       <?php $filterParam1 = 43;
+     $url = "products.php?param1=$filterParam1;";
+     echo "<a href='$url'>Консумативи</a>";?></div>
+       
      </div>
-
+    
       
      
          
@@ -66,8 +72,8 @@
 <br>
 <?php echo "<form method='post' action=''>";
 echo"<input type='hidden' name='code' value=".$row['code']." />";
-//echo "<td><a href='shoppingcard.php?code=".$row['code']."'class='buynowbutton''". "'>Купи сега</a> ";
-echo"<button type='submit' class='buynowbutton'>Buy Now</button>";
+//echo "<td><a href='shoppingcart.php?code=".$row['code']."'class='buynowbutton''". "'>Купи сега</a> ";
+echo"<button type='submit' class='buynowbuttonshop'>Добави в количка</button>";
 echo"</form>";
 ?>
 
@@ -82,7 +88,7 @@ echo"</form>";
 $status="";
 if (isset($_POST['code']) && $_POST['code']!=""){
 $code = $_POST['code'];
- $sql = "SELECT * FROM `images3` WHERE `code` = ?";
+ $sql = "SELECT * FROM `products` WHERE `code` = ?";
 $stmt = mysqli_prepare($db, $sql);
 mysqli_stmt_bind_param($stmt, "s", $code);
 mysqli_stmt_execute($stmt);
@@ -90,6 +96,7 @@ $result = mysqli_stmt_get_result($stmt);
 $row = mysqli_fetch_assoc($result);
 $id_product = $row['id'];
 $title = $row['title'];
+$desc =$row['short_desc'];
 $code = $row['code'];
 $price = $row['price'];
 $image = $row['image'];
@@ -97,6 +104,7 @@ $cartArray = array(
 	$code=>array(
     'id'=>$id_product,
 	'title'=>$title,
+    'desc'=>$desc,
 	'code'=>$code,
 	'price'=>$price,
 	'quantity'=>1,
@@ -105,31 +113,31 @@ $cartArray = array(
 
 if(empty($_SESSION["shopping_cart"])) {
     $_SESSION["shopping_cart"] = $cartArray;
-    $status = "<div class='box'>Product is added to your cart!</div>";
+    $status = "<div class='box'Продуктът е добавен във вашата количка!</div>";
    
 }else{
     $array_keys = array_keys($_SESSION["shopping_cart"]);
     if(in_array($code,$array_keys)) {
 	$status = "<div class='box' style='color:red;'>
-	Product is already added to your cart!</div>";	
+	Продуктът вече е добавен във вашата количка!</div>";	
     } else {
     $_SESSION["shopping_cart"] = array_merge(
     $_SESSION["shopping_cart"],
     $cartArray
     );
-    $status = "<div class='box'>Product is added to your cart!</div>";
+    $status = "<div class='box'>Продуктът е добавен във вашата количка!</div>";
 	}
 
 	}
 }
 ?>
+
 <?php
 if(!empty($_SESSION["shopping_cart"])) {
 $cart_count = count(array_keys($_SESSION["shopping_cart"]));
 ?>
 <div class="cart_div">
-<a href="shoppingcard.php"><img src="cart-icon.png" /> Cart<span>
-<?php echo $cart_count; ?></span></a>
+
 </div>
 <?php
 }
@@ -139,7 +147,7 @@ $cart_count = count(array_keys($_SESSION["shopping_cart"]));
 <?php 
    $id = $_GET['id'];
 
-  $sql = "SELECT * FROM images3 where id = ?";
+  $sql = "SELECT * FROM products where id = ?";
 $stmt = mysqli_prepare($db, $sql);
 mysqli_stmt_bind_param($stmt, "s", $id);
 mysqli_stmt_execute($stmt);
@@ -151,22 +159,25 @@ $result = mysqli_stmt_get_result($stmt);
     $price2 = $price + 200;
    }
 
-   $sql = "SELECT * FROM images3 WHERE price BETWEEN ? AND ? AND id <> ? LIMIT 4";
+   $sql = "SELECT * FROM products WHERE price BETWEEN ? AND ? AND id <> ? LIMIT 4";
    $stmt = mysqli_prepare($db, $sql);
    mysqli_stmt_bind_param($stmt, "ddd", $price1, $price2, $id);
    mysqli_stmt_execute($stmt);
    $result = mysqli_stmt_get_result($stmt); ?> 
  
  <br>
-
+ <div class="top-product1">
+ <p><b>Потребителите избират също<b></p>
+</div>
  <div class="container2suggestion">
+ 
  <div class="container1suggestion">
   
  <?php if($result->num_rows > 0){ ?> 
 
        <?php while($row = mysqli_fetch_assoc($result)){ ?> 
            
-         <div class="item">
+         <div class="item2">
         <?php $image_unescaped = ($row['image']) ;
         $image_escaped = str_replace("/","\\",$image_unescaped) ?>
              <a href='product.php?id=<?= $row['id'] ?>' class="product-link">
@@ -177,7 +188,7 @@ $result = mysqli_stmt_get_result($stmt);
               <!-- <?php echo ($row['file_name']); ?> -->
             
             
-              <div class="textproducts"> <?php echo ($row['short_desc']); ?>
+              <div class="textproducts1"> <?php echo ($row['short_desc']); ?>
              </div></div>
               </div>
               
@@ -197,5 +208,7 @@ $result = mysqli_stmt_get_result($stmt);
    <p class="status error">Image(s) not found...</p> 
 <?php } ?>
 </div>
+</div>
  </div>
+ 
  <?php  include('templates/footer.php'); ?>
